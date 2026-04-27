@@ -293,3 +293,15 @@
 
 ### Next Step
 - Rebuild a clean local `main` history before pushing to GitHub, because a normal cleanup commit would still push the old large generated-file commit.
+
+## Phase 23 - GitHub Push Through Proxy
+
+### Changes
+- Configured repository-local Git proxy settings for `http://127.0.0.1:10808`.
+- Set Git HTTP transport to `HTTP/1.1` with a larger post buffer for proxy compatibility.
+- Rebuilt `main` as a clean one-commit history so generated folders are not part of the branch history.
+
+### Verification
+- Confirmed `127.0.0.1:10808` was reachable.
+- Confirmed `main` had one clean commit and did not track `node_modules`, `dist`, `.astro`, browser profiles, screenshots, or preview logs.
+- Pushed `main` to `https://github.com/jsw-teams/myweb.git` successfully.
