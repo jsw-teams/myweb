@@ -1,0 +1,68 @@
+---
+import { site } from '../data/site';
+import { messages } from '../i18n/messages';
+import type { Lang, PageKey } from '../i18n/config';
+import { getMarkdownPath } from '../lib/i18n';
+import { absoluteUrl, getBreadcrumbs, getSeo } from '../lib/seo';
+
+type Props = {
+  lang: Lang;
+  page: PageKey;
+};
+
+const { lang, page } = Astro.props;
+const seo = getSeo(lang, page);
+const copy = messages[lang].pages[page];
+const breadcrumbs = getBreadcrumbs(lang, page);
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: site.name,
+    alternateName: [site.shortName, site.zhName],
+    url: site.url,
+    description: messages[lang].pages.home.description,
+    inLanguage: lang
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: site.name,
+    url: site.url,
+    image: absoluteUrl(site.icon)
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url
+    }))
+  }
+];
+---
+<title>{seo.title}</title>
+<meta name="description" content={seo.description} />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href={seo.canonical} />
+<link rel="icon" href={site.icon} />
+<link rel="apple-touch-icon" href={site.icon} />
+<link rel="alternate" type="text/markdown" href={getMarkdownPath(lang, page)} />
+{seo.alternates.map((alternate) => (
+  <link rel="alternate" hreflang={alternate.lang} href={alternate.href} />
+))}
+<link rel="alternate" hreflang="x-default" href={absoluteUrl('/zh-CN/')} />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:title" content={copy.title} />
+<meta property="og:description" content={seo.description} />
+<meta property="og:url" content={seo.canonical} />
+<meta property="og:image" content={seo.image} />
+<meta property="og:locale" content={lang.replace('-', '_')} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={copy.title} />
+<meta name="twitter:description" content={seo.description} />
+<meta name="twitter:image" content={seo.image} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>

@@ -1,0 +1,34 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Seo from '../components/Seo.astro';
+import type { Lang, PageKey } from '../i18n/config';
+import { messages } from '../i18n/messages';
+import '../styles/global.css';
+
+type Props = {
+  lang: Lang;
+  page: PageKey;
+};
+
+const { lang, page } = Astro.props;
+const t = messages[lang];
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <Seo lang={lang} page={page} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t.skip}</a>
+    <div class="page-shell">
+      <Header lang={lang} page={page} />
+      <main id="main" tabindex="-1">
+        <slot />
+      </main>
+      <Footer lang={lang} page={page} />
+    </div>
+  </body>
+</html>

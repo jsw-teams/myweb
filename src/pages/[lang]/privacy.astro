@@ -1,0 +1,28 @@
+---
+import LanguageLinks from '../../components/LanguageLinks.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { languages, type PageKey } from '../../i18n/config';
+import { messages } from '../../i18n/messages';
+import { getLang, getPagePath } from '../../lib/i18n';
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = getLang(Astro.params.lang);
+const page: PageKey = 'privacy';
+const t = messages[lang];
+---
+<BaseLayout lang={lang} page={page}>
+  <LanguageLinks lang={lang} page={page} />
+  <section class="page-heading" aria-labelledby="page-title">
+    <h1 id="page-title">{t.pages.privacy.heading}</h1>
+    <p class="lead">{t.pages.privacy.intro}</p>
+  </section>
+  <section class="panel" aria-label={t.pages.privacy.heading}>
+    <ul class="plain-list">
+      {t.privacy.points.map((point) => <li>{point}</li>)}
+    </ul>
+    <p><a class="button-link" href={getPagePath(lang, 'contact')}>{t.privacy.contactCta}</a></p>
+  </section>
+</BaseLayout>

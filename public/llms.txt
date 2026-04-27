@@ -1,0 +1,26 @@
+# JS.Gripe / 技诉
+
+JS.Gripe / 技诉 is a public entrance for technical notes, public projects, writing, friend links, and contact.
+
+Supported languages: zh-CN, zh-TW, en.
+
+## Pages
+
+- zh-CN home: https://js.gripe/zh-CN/ | Markdown: https://js.gripe/md/zh-CN/index.md
+- zh-CN projects: https://js.gripe/zh-CN/projects/ | Markdown: https://js.gripe/md/zh-CN/projects.md
+- zh-CN writing: https://js.gripe/zh-CN/writing/ | Markdown: https://js.gripe/md/zh-CN/writing.md
+- zh-CN privacy: https://js.gripe/zh-CN/privacy/ | Markdown: https://js.gripe/md/zh-CN/privacy.md
+- zh-CN friends: https://js.gripe/zh-CN/friends/ | Markdown: https://js.gripe/md/zh-CN/friends.md
+- zh-CN contact: https://js.gripe/zh-CN/contact/ | Markdown: https://js.gripe/md/zh-CN/contact.md
+- zh-TW home: https://js.gripe/zh-TW/ | Markdown: https://js.gripe/md/zh-TW/index.md
+- zh-TW projects: https://js.gripe/zh-TW/projects/ | Markdown: https://js.gripe/md/zh-TW/projects.md
+- zh-TW writing: https://js.gripe/zh-TW/writing/ | Markdown: https://js.gripe/md/zh-TW/writing.md
+- zh-TW privacy: https://js.gripe/zh-TW/privacy/ | Markdown: https://js.gripe/md/zh-TW/privacy.md
+- zh-TW friends: https://js.gripe/zh-TW/friends/ | Markdown: https://js.gripe/md/zh-TW/friends.md
+- zh-TW contact: https://js.gripe/zh-TW/contact/ | Markdown: https://js.gripe/md/zh-TW/contact.md
+- en home: https://js.gripe/en/ | Markdown: https://js.gripe/md/en/index.md
+- en projects: https://js.gripe/en/projects/ | Markdown: https://js.gripe/md/en/projects.md
+- en writing: https://js.gripe/en/writing/ | Markdown: https://js.gripe/md/en/writing.md
+- en privacy: https://js.gripe/en/privacy/ | Markdown: https://js.gripe/md/en/privacy.md
+- en friends: https://js.gripe/en/friends/ | Markdown: https://js.gripe/md/en/friends.md
+- en contact: https://js.gripe/en/contact/ | Markdown: https://js.gripe/md/en/contact.md

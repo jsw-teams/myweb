@@ -1,0 +1,32 @@
+---
+import LanguageLinks from '../../components/LanguageLinks.astro';
+import MascotCard from '../../components/MascotCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+import { languages, type PageKey } from '../../i18n/config';
+import { messages } from '../../i18n/messages';
+import { getLang } from '../../lib/i18n';
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = getLang(Astro.params.lang);
+const page: PageKey = 'writing';
+const t = messages[lang];
+---
+<BaseLayout lang={lang} page={page}>
+  <LanguageLinks lang={lang} page={page} />
+  <section class="page-heading" aria-labelledby="page-title">
+    <h1 id="page-title">{t.pages.writing.heading}</h1>
+    <p class="lead">{t.pages.writing.intro}</p>
+  </section>
+  <div class="content-grid">
+    <section class="panel" aria-label={t.pages.writing.heading}>
+      <h2>{t.writing.blogLink}</h2>
+      <p>{t.writing.note}</p>
+      <p><a class="button-link" href={site.blogUrl} rel="noopener noreferrer">{site.blogUrl}</a></p>
+    </section>
+    <MascotCard image="/assets/brand/mascot-laptop.png" compact alt={t.writing.mascotAlt} />
+  </div>
+</BaseLayout>

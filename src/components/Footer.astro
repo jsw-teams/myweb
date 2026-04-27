@@ -1,0 +1,24 @@
+---
+import { footerItems } from '../data/nav';
+import { messages } from '../i18n/messages';
+import type { Lang, PageKey } from '../i18n/config';
+import { getPagePath } from '../lib/i18n';
+
+type Props = {
+  lang: Lang;
+  page: PageKey;
+};
+
+const { lang, page } = Astro.props;
+const t = messages[lang];
+---
+<footer class="site-footer">
+  <p>{t.footerNote}</p>
+  <nav aria-label={t.pages.privacy.heading}>
+    {footerItems.map((item) => (
+      <a href={getPagePath(lang, item)} aria-current={page === item ? 'page' : undefined}>
+        {t.pages[item].heading}
+      </a>
+    ))}
+  </nav>
+</footer>
