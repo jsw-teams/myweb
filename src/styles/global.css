@@ -345,20 +345,6 @@ h3 {
   box-shadow: var(--soft-shadow);
 }
 
-.mascot-icon {
-  position: absolute;
-  top: 0.85rem;
-  right: 0.85rem;
-  width: 56px;
-  height: 56px;
-  border-radius: 8px;
-  filter: drop-shadow(0 6px 14px rgba(39, 52, 43, 0.16));
-}
-
-.mascot-card.compact .mascot-icon {
-  display: none;
-}
-
 .mascot-sheet {
   width: min(100%, 390px);
   max-height: 390px;
