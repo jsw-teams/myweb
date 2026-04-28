@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { defaultLang, languageNames, languages } from '../i18n/config';
+import { getPagePath } from '../lib/i18n';
+import { absoluteUrl } from '../lib/seo';
+
+const copy = {
+  title: '页面未找到 / Page not found',
+  description: '这个路径不存在。请选择语言返回 JS.Gripe 首页。',
+  heading: '页面未找到',
+  intro: '这个路径没有对应页面，可能已经移动、删除，或链接输入有误。',
+  home: '返回首页',
+  language: '选择语言'
+};
+---
+<BaseLayout
+  lang={defaultLang}
+  page="home"
+  seo={{
+    title: `${copy.title} / JS.Gripe`,
+    description: copy.description,
+    canonical: absoluteUrl('/404.html'),
+    robots: 'noindex, follow',
+    includeAlternates: false,
+    includeMarkdownAlternate: false,
+    includeStructuredData: false
+  }}
+>
+  <section class="error-page" aria-labelledby="page-title">
+    <p class="eyebrow">404</p>
+    <h1 id="page-title">{copy.heading}</h1>
+    <p class="lead">{copy.intro}</p>
+    <div class="error-actions">
+      <a class="button-link primary" href={getPagePath(defaultLang, 'home')}>{copy.home}</a>
+      <nav class="language-links inline" aria-label={copy.language}>
+        <span>{copy.language}</span>
+        <ul>
+          {languages.map((lang) => (
+            <li>
+              <a href={getPagePath(lang, 'home')} hreflang={lang}>{languageNames[lang]}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </section>
+</BaseLayout>

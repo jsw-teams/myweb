@@ -1,0 +1,78 @@
+---
+import { site } from '../data/site';
+import { messages } from '../i18n/messages';
+import type { Lang, PageKey } from '../i18n/config';
+import { getMarkdownPath } from '../lib/i18n';
+import { absoluteUrl, getBreadcrumbs, getSeo, type SeoOverrides } from '../lib/seo';
+
+type Props = {
+  lang: Lang;
+  page: PageKey;
+  seo?: SeoOverrides;
+};
+
+const { lang, page, seo: overrides = {} } = Astro.props;
+const seo = getSeo(lang, page);
+const breadcrumbs = getBreadcrumbs(lang, page);
+const title = overrides.title ?? seo.title;
+const description = overrides.description ?? seo.description;
+const canonical = overrides.canonical ?? seo.canonical;
+const image = overrides.image ?? seo.image;
+const robots = overrides.robots ?? 'index, follow';
+const includeAlternates = overrides.includeAlternates ?? true;
+const includeMarkdownAlternate = overrides.includeMarkdownAlternate ?? true;
+const includeStructuredData = overrides.includeStructuredData ?? true;
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: site.name,
+    alternateName: [site.shortName, site.zhName],
+    url: site.url,
+    description: messages[lang].pages.home.description,
+    inLanguage: lang
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: site.name,
+    url: site.url,
+    image: absoluteUrl(site.icon)
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url
+    }))
+  }
+];
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="robots" content={robots} />
+<link rel="canonical" href={canonical} />
+<link rel="icon" href={site.icon} />
+<link rel="apple-touch-icon" href={site.icon} />
+{includeMarkdownAlternate && <link rel="alternate" type="text/markdown" href={getMarkdownPath(lang, page)} />}
+{includeAlternates && seo.alternates.map((alternate) => (
+  <link rel="alternate" hreflang={alternate.lang} href={alternate.href} />
+))}
+{includeAlternates && <link rel="alternate" hreflang="x-default" href={absoluteUrl('/zh-CN/')} />}
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={image} />
+<meta property="og:locale" content={lang.replace('-', '_')} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />
+{includeStructuredData && (
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+)}

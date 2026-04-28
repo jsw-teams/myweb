@@ -1,0 +1,63 @@
+# JS.Gripe / 技诉
+
+JS.Gripe / 技诉 collects technical notes, public projects, writing, friend links, and contact in one quiet public place.
+
+## zh-CN
+
+### 技诉
+技诉收拢技术记录、项目展示、写作与公开联络。
+
+### 项目
+公开项目正在整理。
+
+### 写作
+写作页面：https://blog.js.gripe/zh-CN/
+
+### 隐私政策
+默认不主动收集个人信息。不使用第三方追踪脚本。访问日志与安全日志可能由基础设施产生。隐私相关请求可通过联系方式页面提出。
+
+### 友情链接
+友情链接暂未列出。
+
+### 联系方式
+暂无公开联系方式。请不要通过公开页面发送敏感信息。
+
+## zh-TW
+
+### 技訴
+技訴收攏技術紀錄、專案展示、寫作與公開聯絡。
+
+### 專案
+公開專案正在整理。
+
+### 寫作
+寫作頁面：https://blog.js.gripe/zh-TW/
+
+### 隱私政策
+預設不主動收集個人資訊。不使用第三方追蹤腳本。訪問日誌與安全日誌可能由基礎設施產生。隱私相關請求可透過聯絡方式頁面提出。
+
+### 友情連結
+友情連結暫未列出。
+
+### 聯絡方式
+暫無公開聯絡方式。請不要透過公開頁面傳送敏感資訊。
+
+## en
+
+### JS.Gripe
+JS.Gripe collects technical notes, public projects, writing, and contact.
+
+### Projects
+Public projects are being curated.
+
+### Writing
+Writing page: https://blog.js.gripe/en/
+
+### Privacy
+This site does not actively collect personal information by default. No third-party tracking scripts are used. Access logs and security logs may be produced by infrastructure. Privacy requests can be sent through the contact page.
+
+### Friends
+No friend links are listed yet.
+
+### Contact
+No public contact option is listed yet. Please do not send sensitive information through public pages.

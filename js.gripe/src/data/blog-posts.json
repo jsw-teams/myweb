@@ -1,0 +1,19 @@
+{
+  "zh-CN": [
+    {
+      "title": "技诉 Blog 正式启用",
+      "url": "https://blog.js.gripe/zh-CN/posts/welcome/",
+      "date": "Mon, 27 Apr 2026 00:00:00 GMT",
+      "excerpt": "这里会记录技术实践、网络服务、写作与观察，也留下一些问题被解决前后的痕迹。"
+    }
+  ],
+  "zh-TW": [],
+  "en": [
+    {
+      "title": "Blog.js.gripe is online",
+      "url": "https://blog.js.gripe/en/posts/welcome/",
+      "date": "Mon, 27 Apr 2026 00:00:00 GMT",
+      "excerpt": "A quiet place for technical practice, web services, writing notes, and the trail left by solved problems."
+    }
+  ]
+}

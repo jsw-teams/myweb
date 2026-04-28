@@ -1,0 +1,63 @@
+---
+import LanguageLinks from '../../components/LanguageLinks.astro';
+import MascotCard from '../../components/MascotCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { languages, type PageKey } from '../../i18n/config';
+import { messages } from '../../i18n/messages';
+import { getBlogUrl, getRecentPosts } from '../../lib/blog';
+import { getLang } from '../../lib/i18n';
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = getLang(Astro.params.lang);
+const page: PageKey = 'writing';
+const t = messages[lang];
+const posts = await getRecentPosts(lang);
+const blogUrl = getBlogUrl(lang);
+const dateFormatter = new Intl.DateTimeFormat(lang, { dateStyle: 'medium' });
+
+function formatDate(date: string | undefined) {
+  if (!date) return '';
+  const parsed = new Date(date);
+  return Number.isNaN(parsed.valueOf()) ? '' : dateFormatter.format(parsed);
+}
+---
+<BaseLayout lang={lang} page={page}>
+  <LanguageLinks lang={lang} page={page} />
+  <section class="page-heading" aria-labelledby="page-title">
+    <h1 id="page-title">{t.pages.writing.heading}</h1>
+  </section>
+  <div class="content-grid">
+    <section class="article-list" aria-labelledby="recent-posts">
+      <div class="section-heading">
+        <div>
+          <h2 id="recent-posts">{t.writing.recentHeading}</h2>
+        </div>
+        <a class="button-link" href={blogUrl} rel="noopener noreferrer">{t.writing.blogLink}</a>
+      </div>
+      {posts.length === 0 ? (
+        <div class="empty-state">
+          <h2>{t.writing.emptyTitle}</h2>
+          <p>{t.writing.emptyText}</p>
+        </div>
+      ) : (
+        posts.map((post) => {
+          const date = formatDate(post.date);
+          return (
+            <article class="article-card">
+              <a href={post.url} rel="noopener noreferrer">
+                {date && <p class="article-meta">{t.writing.published} <time datetime={post.date}>{date}</time></p>}
+                <h2>{post.title}</h2>
+                {post.excerpt && <p>{post.excerpt}</p>}
+                <span class="read-more">{t.writing.readMore}</span>
+              </a>
+            </article>
+          );
+        })
+      )}
+    </section>
+    <MascotCard image="/assets/brand/mascot-laptop.png" compact alt={t.writing.mascotAlt} />
+  </div>
+</BaseLayout>
