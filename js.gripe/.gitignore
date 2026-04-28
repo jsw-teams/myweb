@@ -1,8 +1,0 @@
-node_modules/
-dist/
-.astro/
-screenshots/
-.edge-shot-profile/
-preview.log
-preview.err.log
-npm-debug.log*

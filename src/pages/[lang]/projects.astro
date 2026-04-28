@@ -20,14 +20,12 @@ const projects = getPublicProjects();
   <LanguageLinks lang={lang} page={page} />
   <section class="page-heading" aria-labelledby="page-title">
     <h1 id="page-title">{t.pages.projects.heading}</h1>
-    <p class="lead">{t.pages.projects.intro}</p>
   </section>
   <div class="content-grid">
     <section class="list-grid" aria-label={t.pages.projects.heading}>
       {projects.length === 0 ? (
         <div class="empty-state">
           <h2>{t.projects.emptyTitle}</h2>
-          <p>{t.projects.emptyText}</p>
         </div>
       ) : (
         projects.map((project) => (

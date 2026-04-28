@@ -19,14 +19,12 @@ const t = messages[lang];
   <LanguageLinks lang={lang} page={page} />
   <section class="page-heading" aria-labelledby="page-title">
     <h1 id="page-title">{t.pages.friends.heading}</h1>
-    <p class="lead">{t.pages.friends.intro}</p>
   </section>
   <div class="content-grid">
     <section class="list-grid" aria-label={t.pages.friends.heading}>
       {friends.length === 0 ? (
         <div class="empty-state">
           <h2>{t.friends.emptyTitle}</h2>
-          <p>{t.friends.emptyText}</p>
         </div>
       ) : (
         friends.map((friend) => (

@@ -4,14 +4,16 @@ import Footer from '../components/Footer.astro';
 import Seo from '../components/Seo.astro';
 import type { Lang, PageKey } from '../i18n/config';
 import { messages } from '../i18n/messages';
+import type { SeoOverrides } from '../lib/seo';
 import '../styles/global.css';
 
 type Props = {
   lang: Lang;
   page: PageKey;
+  seo?: SeoOverrides;
 };
 
-const { lang, page } = Astro.props;
+const { lang, page, seo } = Astro.props;
 const t = messages[lang];
 ---
 <!doctype html>
@@ -19,7 +21,7 @@ const t = messages[lang];
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <Seo lang={lang} page={page} />
+    <Seo lang={lang} page={page} seo={seo} />
   </head>
   <body>
     <a class="skip-link" href="#main">{t.skip}</a>

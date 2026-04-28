@@ -5,7 +5,6 @@ type PageCopy = {
   description: string;
   eyebrow?: string;
   heading: string;
-  intro: string;
 };
 
 type Messages = {
@@ -13,7 +12,6 @@ type Messages = {
   availableLanguages: string;
   skip: string;
   navLabel: string;
-  footerNote: string;
   current: string;
   external: string;
   cards: {
@@ -30,12 +28,15 @@ type Messages = {
   };
   projects: {
     emptyTitle: string;
-    emptyText: string;
     mascotAlt: string;
   };
   writing: {
     blogLink: string;
-    note: string;
+    recentHeading: string;
+    emptyTitle: string;
+    emptyText: string;
+    readMore: string;
+    published: string;
     mascotAlt: string;
   };
   privacy: {
@@ -44,13 +45,11 @@ type Messages = {
   };
   friends: {
     emptyTitle: string;
-    emptyText: string;
     langLabel: string;
     mascotAlt: string;
   };
   contact: {
     emptyTitle: string;
-    emptyText: string;
     safetyNote: string;
     mascotAlt: string;
   };
@@ -63,7 +62,6 @@ export const messages: Record<Lang, Messages> = {
     availableLanguages: '本文可用语言：',
     skip: '跳到主要内容',
     navLabel: '主导航',
-    footerNote: '一个安静的公开页面。',
     current: '当前页面',
     external: '打开外部链接',
     cards: {
@@ -85,12 +83,15 @@ export const messages: Record<Lang, Messages> = {
     },
     projects: {
       emptyTitle: '公开项目正在整理',
-      emptyText: '这里只呈现适合公开阅读和长期访问的项目。',
       mascotAlt: '技诉正在电脑前整理项目的黑熊吉祥物'
     },
     writing: {
-      blogLink: '打开写作页面',
-      note: '记录与短文会保持轻量、清楚，并放在独立页面。',
+      blogLink: '打开全部写作',
+      recentHeading: '最近文章',
+      emptyTitle: '文章正在整理',
+      emptyText: '暂时没有从订阅源读取到文章，稍后会在这里展示最新内容。',
+      readMore: '阅读全文',
+      published: '发布于',
       mascotAlt: '技诉正在电脑前写作的黑熊吉祥物'
     },
     privacy: {
@@ -104,13 +105,11 @@ export const messages: Record<Lang, Messages> = {
     },
     friends: {
       emptyTitle: '友情链接暂未列出',
-      emptyText: '这里只放置少量清晰、稳定、适合公开访问的站点。',
       langLabel: '语言',
       mascotAlt: '技诉举着友情链接牌的黑熊吉祥物'
     },
     contact: {
       emptyTitle: '暂无公开联系方式',
-      emptyText: '适合公开展示的联系方式会保持简洁，并集中放在这里。',
       safetyNote: '请不要通过公开页面发送敏感信息。',
       mascotAlt: '技诉拿着手机的黑熊吉祥物'
     },
@@ -119,38 +118,32 @@ export const messages: Record<Lang, Messages> = {
         title: 'JS.Gripe / 技诉',
         description: '技诉收拢技术记录、项目展示、写作与公开联络。',
         eyebrow: 'JS.Gripe',
-        heading: '技诉',
-        intro: '一个克制、清楚的公开页面。'
+        heading: '技诉'
       },
       projects: {
         title: '项目 / JS.Gripe',
         description: 'JS.Gripe 的公开项目展示。',
-        heading: '项目',
-        intro: '这里保留适合公开展示的项目。'
+        heading: '项目'
       },
       writing: {
         title: '写作 / JS.Gripe',
         description: 'JS.Gripe 的写作页面。',
-        heading: '写作',
-        intro: '技术记录与短文放在更适合阅读的位置。'
+        heading: '写作'
       },
       privacy: {
         title: '隐私政策 / JS.Gripe',
         description: 'JS.Gripe 的简洁隐私说明。',
-        heading: '隐私政策',
-        intro: '这里说明本站如何对待访问与联系信息。'
+        heading: '隐私政策'
       },
       friends: {
         title: '友情链接 / JS.Gripe',
         description: 'JS.Gripe 的友情链接。',
-        heading: '友情链接',
-        intro: '保留一些值得公开访问的链接。'
+        heading: '友情链接'
       },
       contact: {
         title: '联系方式 / JS.Gripe',
         description: 'JS.Gripe 的公开联系方式。',
-        heading: '联系方式',
-        intro: '这里仅放置适合公开展示的联系方式。'
+        heading: '联系方式'
       }
     }
   },
@@ -159,7 +152,6 @@ export const messages: Record<Lang, Messages> = {
     availableLanguages: '本文可用語言：',
     skip: '跳到主要內容',
     navLabel: '主導覽',
-    footerNote: '一個安靜的公開頁面。',
     current: '目前頁面',
     external: '開啟外部連結',
     cards: {
@@ -181,12 +173,15 @@ export const messages: Record<Lang, Messages> = {
     },
     projects: {
       emptyTitle: '公開專案正在整理',
-      emptyText: '這裡只呈現適合公開閱讀和長期訪問的專案。',
       mascotAlt: '技訴正在電腦前整理專案的黑熊吉祥物'
     },
     writing: {
-      blogLink: '打開寫作頁面',
-      note: '紀錄與短文會保持輕量、清楚，並放在獨立頁面。',
+      blogLink: '打開全部寫作',
+      recentHeading: '最近文章',
+      emptyTitle: '文章正在整理',
+      emptyText: '暫時沒有從訂閱源讀取到文章，稍後會在這裡展示最新內容。',
+      readMore: '閱讀全文',
+      published: '發布於',
       mascotAlt: '技訴正在電腦前寫作的黑熊吉祥物'
     },
     privacy: {
@@ -200,13 +195,11 @@ export const messages: Record<Lang, Messages> = {
     },
     friends: {
       emptyTitle: '友情連結暫未列出',
-      emptyText: '這裡只放置少量清晰、穩定、適合公開訪問的站點。',
       langLabel: '語言',
       mascotAlt: '技訴舉著友情連結牌的黑熊吉祥物'
     },
     contact: {
       emptyTitle: '暫無公開聯絡方式',
-      emptyText: '適合公開展示的聯絡方式會保持簡潔，並集中放在這裡。',
       safetyNote: '請不要透過公開頁面傳送敏感資訊。',
       mascotAlt: '技訴拿著手機的黑熊吉祥物'
     },
@@ -215,38 +208,32 @@ export const messages: Record<Lang, Messages> = {
         title: 'JS.Gripe / 技訴',
         description: '技訴收攏技術紀錄、專案展示、寫作與公開聯絡。',
         eyebrow: 'JS.Gripe',
-        heading: '技訴',
-        intro: '一個克制、清楚的公開頁面。'
+        heading: '技訴'
       },
       projects: {
         title: '專案 / JS.Gripe',
         description: 'JS.Gripe 的公開專案展示。',
-        heading: '專案',
-        intro: '這裡保留適合公開展示的專案。'
+        heading: '專案'
       },
       writing: {
         title: '寫作 / JS.Gripe',
         description: 'JS.Gripe 的寫作頁面。',
-        heading: '寫作',
-        intro: '技術紀錄與短文放在更適合閱讀的位置。'
+        heading: '寫作'
       },
       privacy: {
         title: '隱私政策 / JS.Gripe',
         description: 'JS.Gripe 的簡潔隱私說明。',
-        heading: '隱私政策',
-        intro: '這裡說明本站如何對待訪問與聯絡資訊。'
+        heading: '隱私政策'
       },
       friends: {
         title: '友情連結 / JS.Gripe',
         description: 'JS.Gripe 的友情連結。',
-        heading: '友情連結',
-        intro: '保留一些值得公開訪問的連結。'
+        heading: '友情連結'
       },
       contact: {
         title: '聯絡方式 / JS.Gripe',
         description: 'JS.Gripe 的公開聯絡方式。',
-        heading: '聯絡方式',
-        intro: '這裡僅放置適合公開展示的聯絡方式。'
+        heading: '聯絡方式'
       }
     }
   },
@@ -255,7 +242,6 @@ export const messages: Record<Lang, Messages> = {
     availableLanguages: 'Available languages:',
     skip: 'Skip to main content',
     navLabel: 'Primary navigation',
-    footerNote: 'A quiet public entrance.',
     current: 'Current page',
     external: 'Open external link',
     cards: {
@@ -277,12 +263,15 @@ export const messages: Record<Lang, Messages> = {
     },
     projects: {
       emptyTitle: 'Public projects are being curated',
-      emptyText: 'This page only lists work suited for public reading and long-term access.',
       mascotAlt: 'JS.Gripe black bear mascot working at a computer'
     },
     writing: {
-      blogLink: 'Open writing',
-      note: 'Notes and essays stay light, clear, and collected on a dedicated page.',
+      blogLink: 'Open all writing',
+      recentHeading: 'Recent posts',
+      emptyTitle: 'Posts are being organized',
+      emptyText: 'No posts were available from the feed yet. The latest writing will appear here once it is ready.',
+      readMore: 'Read article',
+      published: 'Published',
       mascotAlt: 'JS.Gripe black bear mascot writing at a computer'
     },
     privacy: {
@@ -296,13 +285,11 @@ export const messages: Record<Lang, Messages> = {
     },
     friends: {
       emptyTitle: 'No friend links listed yet',
-      emptyText: 'This page keeps only a small set of clear, stable public sites.',
       langLabel: 'Language',
       mascotAlt: 'JS.Gripe black bear mascot holding a friend links sign'
     },
     contact: {
       emptyTitle: 'No public contact option yet',
-      emptyText: 'Contact options suited for public display will stay concise and collected here.',
       safetyNote: 'Please do not send sensitive information through public pages.',
       mascotAlt: 'JS.Gripe black bear mascot holding a phone'
     },
@@ -311,38 +298,32 @@ export const messages: Record<Lang, Messages> = {
         title: 'JS.Gripe / 技诉',
         description: 'JS.Gripe collects technical notes, public projects, writing, and contact.',
         eyebrow: 'JS.Gripe',
-        heading: 'JS.Gripe',
-        intro: 'A quiet and clear public page.'
+        heading: 'JS.Gripe'
       },
       projects: {
         title: 'Projects / JS.Gripe',
         description: 'Public projects from JS.Gripe.',
-        heading: 'Projects',
-        intro: 'Work suited for public display is kept here.'
+        heading: 'Projects'
       },
       writing: {
         title: 'Writing / JS.Gripe',
         description: 'Writing from JS.Gripe.',
-        heading: 'Writing',
-        intro: 'Notes and essays live where they are easier to read.'
+        heading: 'Writing'
       },
       privacy: {
         title: 'Privacy / JS.Gripe',
         description: 'A short privacy note for JS.Gripe.',
-        heading: 'Privacy',
-        intro: 'How this site treats visits and contact information.'
+        heading: 'Privacy'
       },
       friends: {
         title: 'Friends / JS.Gripe',
         description: 'Friend links for JS.Gripe.',
-        heading: 'Friends',
-        intro: 'A small set of public links.'
+        heading: 'Friends'
       },
       contact: {
         title: 'Contact / JS.Gripe',
         description: 'Public contact options for JS.Gripe.',
-        heading: 'Contact',
-        intro: 'Only contact options suitable for public display are listed here.'
+        heading: 'Contact'
       }
     }
   }

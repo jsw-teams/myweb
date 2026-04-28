@@ -3,6 +3,17 @@ import { languages, type Lang, type PageKey } from '../i18n/config';
 import { messages } from '../i18n/messages';
 import { getPagePath } from './i18n';
 
+export type SeoOverrides = {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+  robots?: string;
+  includeAlternates?: boolean;
+  includeMarkdownAlternate?: boolean;
+  includeStructuredData?: boolean;
+};
+
 export function absoluteUrl(path: string): string {
   return new URL(path, site.url).toString();
 }

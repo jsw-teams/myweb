@@ -4,8 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "sync:blog": "node scripts/sync-blog-feed.mjs",
+    "predev": "node scripts/sync-blog-feed.mjs",
     "dev": "astro dev",
+    "prebuild": "node scripts/sync-blog-feed.mjs",
     "build": "astro build",
+    "preview": "astro preview",
     "check": "astro check"
   },
   "dependencies": {

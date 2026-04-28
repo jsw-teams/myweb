@@ -19,7 +19,6 @@ const t = messages[lang];
   <LanguageLinks lang={lang} page={page} />
   <section class="page-heading" aria-labelledby="page-title">
     <h1 id="page-title">{t.pages.contact.heading}</h1>
-    <p class="lead">{t.pages.contact.intro}</p>
   </section>
   <div class="content-grid">
     <section class="list-grid" aria-label={t.pages.contact.heading}>
@@ -29,7 +28,6 @@ const t = messages[lang];
       {contactLinks.length === 0 ? (
         <div class="empty-state">
           <h2>{t.contact.emptyTitle}</h2>
-          <p>{t.contact.emptyText}</p>
         </div>
       ) : (
         contactLinks.map((item) => (
