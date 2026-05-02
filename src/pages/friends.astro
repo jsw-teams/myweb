@@ -1,17 +1,12 @@
 ---
-import LanguageLinks from '../../components/LanguageLinks.astro';
-import MascotCard from '../../components/MascotCard.astro';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { friends } from '../../data/friends';
-import { prefixedLanguages, type PageKey } from '../../i18n/config';
-import { messages } from '../../i18n/messages';
-import { getLang } from '../../lib/i18n';
+import LanguageLinks from '../components/LanguageLinks.astro';
+import MascotCard from '../components/MascotCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { friends } from '../data/friends';
+import { defaultLang, type PageKey } from '../i18n/config';
+import { messages } from '../i18n/messages';
 
-export function getStaticPaths() {
-  return prefixedLanguages.map((lang) => ({ params: { lang } }));
-}
-
-const lang = getLang(Astro.params.lang);
+const lang = defaultLang;
 const page: PageKey = 'friends';
 const t = messages[lang];
 ---

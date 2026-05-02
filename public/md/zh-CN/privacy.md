@@ -7,4 +7,4 @@
 - 访问日志与安全日志可能由基础设施产生。
 - 隐私相关请求可通过联系方式页面提出。
 
-联系方式：https://js.gripe/zh-CN/contact/
+联系方式：https://js.gripe/contact/

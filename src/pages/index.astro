@@ -1,62 +1,32 @@
 ---
-import { site } from '../data/site';
+import LanguageLinks from '../components/LanguageLinks.astro';
+import MascotCard from '../components/MascotCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { defaultLang, type PageKey } from '../i18n/config';
+import { messages } from '../i18n/messages';
+import { getPagePath } from '../lib/i18n';
 
-const languages = [
-  { code: 'zh-CN', label: '简体中文', href: '/zh-CN/' },
-  { code: 'zh-TW', label: '繁體中文', href: '/zh-TW/' },
-  { code: 'en', label: 'English', href: '/en/' }
-];
+const lang = defaultLang;
+const page: PageKey = 'home';
+const t = messages[lang];
+const entries = ['projects', 'writing', 'friends', 'contact'] as const;
 ---
-<!doctype html>
-<html lang="zh-CN">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="index, follow" />
-    <title>JS.Gripe / 技诉</title>
-    <meta name="description" content="JS.Gripe / 技诉的语言选择页。" />
-    <link rel="canonical" href="https://js.gripe/" />
-    <link rel="icon" href={site.icon} />
-    <link rel="apple-touch-icon" href={site.icon} />
-    {languages.map((language) => (
-      <link rel="alternate" hreflang={language.code} href={`https://js.gripe${language.href}`} />
-    ))}
-    <link rel="alternate" hreflang="x-default" href="https://js.gripe/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={site.name} />
-    <meta property="og:title" content="JS.Gripe / 技诉" />
-    <meta property="og:description" content="JS.Gripe / 技诉的语言选择页。" />
-    <meta property="og:url" content="https://js.gripe/" />
-    <meta property="og:image" content={`https://js.gripe${site.icon}`} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="JS.Gripe / 技诉" />
-    <meta name="twitter:description" content="JS.Gripe / 技诉的语言选择页。" />
-    <meta name="twitter:image" content={`https://js.gripe${site.icon}`} />
-    <script is:inline>
-      const supported = ['zh-CN', 'zh-TW', 'en'];
-      const pick = (tags) => {
-        for (const tag of tags || []) {
-          const normalized = String(tag).toLowerCase();
-          if (normalized === 'zh-tw' || normalized === 'zh-hk' || normalized === 'zh-mo') return 'zh-TW';
-          if (normalized === 'zh-cn' || normalized.startsWith('zh')) return 'zh-CN';
-          if (normalized.startsWith('en')) return 'en';
-        }
-        return 'zh-CN';
-      };
-      location.replace(`/${supported.includes(pick(navigator.languages)) ? pick(navigator.languages) : 'zh-CN'}/`);
-    </script>
-  </head>
-  <body>
-    <main>
-      <h1>JS.Gripe / 技诉</h1>
-      <noscript>
-        <p>请选择语言 / 請選擇語言 / Choose a language:</p>
-        <ul>
-          {languages.map((language) => (
-            <li><a href={language.href} hreflang={language.code}>{language.label}</a></li>
-          ))}
-        </ul>
-      </noscript>
-    </main>
-  </body>
-</html>
+<BaseLayout lang={lang} page={page}>
+  <LanguageLinks lang={lang} page={page} />
+  <section class="hero" aria-labelledby="page-title">
+    <div class="hero-copy">
+      <p class="eyebrow">{t.pages.home.eyebrow}</p>
+      <h1 id="page-title">{t.pages.home.heading}</h1>
+      <p class="lead">{t.home.lead}</p>
+      <div class="entry-grid" aria-label={t.navLabel}>
+        {entries.map((entry) => (
+          <a class="entry-card" href={getPagePath(lang, entry)}>
+            <h2>{t.cards[entry]}</h2>
+            <p>{t.home.entries[entry]}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+    <MascotCard image="/assets/brand/mascot-home.png" alt={t.home.heroAlt} />
+  </section>
+</BaseLayout>

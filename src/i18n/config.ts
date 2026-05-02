@@ -4,6 +4,8 @@ export type Lang = (typeof languages)[number];
 
 export const defaultLang: Lang = 'zh-CN';
 
+export const prefixedLanguages = ['zh-TW', 'en'] as const satisfies readonly Lang[];
+
 export const languageNames: Record<Lang, string> = {
   'zh-CN': '简体中文',
   'zh-TW': '繁體中文',

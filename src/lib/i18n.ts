@@ -10,7 +10,8 @@ export function getLang(value: string | undefined): Lang {
 
 export function getPagePath(lang: Lang, page: PageKey): string {
   const slug = pageSlugs[page];
-  return slug ? `/${lang}/${slug}/` : `/${lang}/`;
+  const pagePath = slug ? `/${slug}/` : '/';
+  return lang === defaultLang ? pagePath : `/${lang}${pagePath}`;
 }
 
 export function getMarkdownPath(lang: Lang, page: PageKey): string {

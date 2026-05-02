@@ -1,15 +1,11 @@
 ---
-import LanguageLinks from '../../components/LanguageLinks.astro';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { prefixedLanguages, type PageKey } from '../../i18n/config';
-import { messages } from '../../i18n/messages';
-import { getLang, getPagePath } from '../../lib/i18n';
+import LanguageLinks from '../components/LanguageLinks.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { defaultLang, type PageKey } from '../i18n/config';
+import { messages } from '../i18n/messages';
+import { getPagePath } from '../lib/i18n';
 
-export function getStaticPaths() {
-  return prefixedLanguages.map((lang) => ({ params: { lang } }));
-}
-
-const lang = getLang(Astro.params.lang);
+const lang = defaultLang;
 const page: PageKey = 'privacy';
 const t = messages[lang];
 ---
