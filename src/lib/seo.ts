@@ -34,6 +34,10 @@ export function getSeo(lang: Lang, page: PageKey) {
   };
 }
 
+export function getXDefaultUrl(page: PageKey) {
+  return page === 'home' ? absoluteUrl('/') : null;
+}
+
 export function getBreadcrumbs(lang: Lang, page: PageKey) {
   const items = [{ name: messages[lang].pages.home.heading, url: absoluteUrl(getPagePath(lang, 'home')) }];
   if (page !== 'home') {
