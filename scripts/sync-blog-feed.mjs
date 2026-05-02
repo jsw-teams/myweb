@@ -3,6 +3,7 @@ import path from 'node:path';
 
 const languages = ['zh-CN', 'zh-TW', 'en'];
 const blogBaseUrl = 'https://blog.js.gripe/';
+const localBlogPublicDir = path.resolve(process.env.BLOG_PUBLIC_DIR ?? '../myblog/public');
 const outputPath = path.resolve('src/data/blog-posts.json');
 const maxPosts = 5;
 const timeoutMs = 8000;
@@ -11,9 +12,10 @@ const next = Object.fromEntries(languages.map((lang) => [lang, []]));
 
 for (const lang of languages) {
   const feedUrl = new URL(`${lang}/feed.xml`, blogBaseUrl).toString();
+  const localFeedPath = path.join(localBlogPublicDir, lang, 'feed.xml');
 
   try {
-    const xml = await fetchText(feedUrl);
+    const xml = await readLocalText(localFeedPath).catch(() => fetchText(feedUrl));
     next[lang] = parseFeed(xml, feedUrl).slice(0, maxPosts);
     console.log(`[blog-feed] ${lang}: synced ${next[lang].length} post(s)`);
   } catch (error) {
@@ -22,6 +24,10 @@ for (const lang of languages) {
 }
 
 await fs.writeFile(outputPath, `${JSON.stringify(next, null, 2)}\n`, 'utf8');
+
+async function readLocalText(filePath) {
+  return fs.readFile(filePath, 'utf8');
+}
 
 async function fetchText(url) {
   const controller = new AbortController();

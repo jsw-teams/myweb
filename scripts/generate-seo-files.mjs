@@ -18,7 +18,7 @@ export async function generateSeoFiles(options = {}) {
   }
 
   await removeLegacySitemapViewFiles(distDir);
-  await fs.writeFile(path.join(distDir, 'sitemap.xml'), buildSitemap(pages), 'utf8');
+  await copyAstroSitemap(distDir);
   await fs.writeFile(path.join(distDir, 'robots.txt'), buildRobotsTxt(siteUrl), 'utf8');
   await fs.writeFile(path.join(distDir, 'llms.txt'), buildLlmsTxt(siteUrl, pages), 'utf8');
   await fs.writeFile(path.join(distDir, 'llms-full.txt'), buildLlmsFullTxt(siteUrl, pages, markdownFiles), 'utf8');
@@ -27,6 +27,16 @@ export async function generateSeoFiles(options = {}) {
     pages: pages.length,
     markdownFiles: markdownFiles.length
   };
+}
+
+async function copyAstroSitemap(distDir) {
+  const primary = path.join(distDir, 'sitemap-0.xml');
+  const canonical = path.join(distDir, 'sitemap.xml');
+  try {
+    await fs.copyFile(primary, canonical);
+  } catch {
+    throw new Error('Expected @astrojs/sitemap to generate sitemap-0.xml before SEO finalization.');
+  }
 }
 
 async function removeLegacySitemapViewFiles(distDir) {
@@ -251,26 +261,6 @@ function getRouteRank(parts) {
   return 60;
 }
 
-function buildSitemap(pages) {
-  const includeAlternates = pages.some((page) => page.alternates.length > 0);
-  const namespace = includeAlternates
-    ? ' xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml"'
-    : ' xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
-  const urls = pages.map((page) => {
-    const alternateLinks = page.alternates.map((alternate) => (
-      `    <xhtml:link rel="alternate" hreflang="${xmlEscape(alternate.hreflang)}" href="${xmlEscape(alternate.href)}" />`
-    ));
-    const children = [
-      `    <loc>${xmlEscape(page.url)}</loc>`,
-      `    <lastmod>${xmlEscape(page.lastmod)}</lastmod>`,
-      ...alternateLinks
-    ].join('\n');
-    return `  <url>\n${children}\n  </url>`;
-  }).join('\n');
-
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset${namespace}>\n${urls}\n</urlset>\n`;
-}
-
 function buildRobotsTxt(siteUrl) {
   return `User-agent: *\nAllow: /\n\nSitemap: ${new URL('/sitemap.xml', `${siteUrl}/`).toString()}\n`;
 }
@@ -365,15 +355,6 @@ function decodeHtmlEntities(value) {
     .replace(/&#39;/g, "'")
     .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
     .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(Number.parseInt(code, 16)));
-}
-
-function xmlEscape(value) {
-  return value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&apos;');
 }
 
 function escapeRegExp(value) {
