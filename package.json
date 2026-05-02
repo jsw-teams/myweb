@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "prebuild": "node scripts/sync-blog-feed.mjs",
     "build": "astro build",
+    "postbuild": "node scripts/generate-seo-files.mjs",
     "preview": "astro preview",
     "check": "astro check"
   },

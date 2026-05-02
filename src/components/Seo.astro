@@ -2,7 +2,7 @@
 import { site } from '../data/site';
 import { messages } from '../i18n/messages';
 import type { Lang, PageKey } from '../i18n/config';
-import { getMarkdownPath } from '../lib/i18n';
+import { getMarkdownPath, getPagePath } from '../lib/i18n';
 import { absoluteUrl, getBreadcrumbs, getSeo, type SeoOverrides } from '../lib/seo';
 
 type Props = {
@@ -61,7 +61,7 @@ const structuredData = [
 {includeAlternates && seo.alternates.map((alternate) => (
   <link rel="alternate" hreflang={alternate.lang} href={alternate.href} />
 ))}
-{includeAlternates && <link rel="alternate" hreflang="x-default" href={absoluteUrl('/zh-CN/')} />}
+{includeAlternates && <link rel="alternate" hreflang="x-default" href={absoluteUrl(getPagePath('zh-CN', page))} />}
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content={site.name} />
 <meta property="og:title" content={title} />
