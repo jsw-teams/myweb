@@ -12,8 +12,8 @@
   Content-Type: application/xml; charset=utf-8
   Cache-Control: public, max-age=3600
 
-/sitemap.xsl
-  Content-Type: text/xsl; charset=utf-8
+/sitemap.css
+  Content-Type: text/css; charset=utf-8
   Cache-Control: public, max-age=3600
 
 /robots.txt

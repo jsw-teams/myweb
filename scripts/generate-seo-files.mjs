@@ -16,8 +16,9 @@ export async function generateSeoFiles(options = {}) {
     throw new Error(`No HTML pages were found in ${distDir}`);
   }
 
+  await fs.rm(path.join(distDir, 'sitemap.xsl'), { force: true });
   await fs.writeFile(path.join(distDir, 'sitemap.xml'), buildSitemap(pages), 'utf8');
-  await fs.writeFile(path.join(distDir, 'sitemap.xsl'), buildSitemapStylesheet(), 'utf8');
+  await fs.writeFile(path.join(distDir, 'sitemap.css'), buildSitemapCss(), 'utf8');
   await fs.writeFile(path.join(distDir, 'robots.txt'), buildRobotsTxt(siteUrl), 'utf8');
   await fs.writeFile(path.join(distDir, 'llms.txt'), buildLlmsTxt(siteUrl, pages), 'utf8');
   await fs.writeFile(path.join(distDir, 'llms-full.txt'), buildLlmsFullTxt(siteUrl, pages, markdownFiles), 'utf8');
@@ -203,101 +204,75 @@ function buildSitemap(pages) {
     return `  <url>\n${children}\n  </url>`;
   }).join('\n');
 
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>\n<urlset${namespace}>\n${urls}\n</urlset>\n`;
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<?xml-stylesheet type="text/css" href="/sitemap.css"?>\n<urlset${namespace}>\n${urls}\n</urlset>\n`;
 }
 
-function buildSitemapStylesheet() {
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0"
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:sm="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <xsl:output method="html" encoding="UTF-8" indent="yes" />
-  <xsl:template match="/">
-    <html lang="en">
-      <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Sitemap</title>
-        <style>
-          body {
-            color: #111827;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            line-height: 1.5;
-            margin: 0;
-            padding: 32px;
-          }
-          main {
-            max-width: 1120px;
-          }
-          h1 {
-            font-size: 28px;
-            line-height: 1.2;
-            margin: 0 0 8px;
-          }
-          p {
-            color: #4b5563;
-            margin: 0 0 24px;
-          }
-          table {
-            border-collapse: collapse;
-            width: 100%;
-          }
-          th,
-          td {
-            border-bottom: 1px solid #e5e7eb;
-            padding: 10px 12px;
-            text-align: left;
-            vertical-align: top;
-          }
-          th {
-            background: #f9fafb;
-            font-size: 13px;
-            text-transform: uppercase;
-          }
-          a {
-            color: #0f766e;
-            overflow-wrap: anywhere;
-          }
-          .count {
-            white-space: nowrap;
-          }
-        </style>
-      </head>
-      <body>
-        <main>
-          <h1>Sitemap</h1>
-          <p>
-            <xsl:value-of select="count(sm:urlset/sm:url)" />
-            <xsl:text> URLs are available for crawlers.</xsl:text>
-          </p>
-          <table>
-            <thead>
-              <tr>
-                <th>URL</th>
-                <th class="count">Alternates</th>
-              </tr>
-            </thead>
-            <tbody>
-              <xsl:for-each select="sm:urlset/sm:url">
-                <tr>
-                  <td>
-                    <a href="{sm:loc}">
-                      <xsl:value-of select="sm:loc" />
-                    </a>
-                  </td>
-                  <td class="count">
-                    <xsl:value-of select="count(xhtml:link)" />
-                  </td>
-                </tr>
-              </xsl:for-each>
-            </tbody>
-          </table>
-        </main>
-      </body>
-    </html>
-  </xsl:template>
-</xsl:stylesheet>
+function buildSitemapCss() {
+  return `@namespace sm url("http://www.sitemaps.org/schemas/sitemap/0.9");
+@namespace xhtml url("http://www.w3.org/1999/xhtml");
+
+sm|urlset {
+  color: #111827;
+  display: block;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 1120px;
+  padding: 32px;
+}
+
+sm|urlset::before {
+  content: "Sitemap";
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+sm|urlset::after {
+  color: #4b5563;
+  content: "Generated from the built static routes. Crawlers should read the XML source.";
+  display: block;
+  font-size: 14px;
+  margin-top: 24px;
+}
+
+sm|url {
+  border-bottom: 1px solid #e5e7eb;
+  display: block;
+  padding: 12px 0;
+}
+
+sm|loc {
+  color: #0f766e;
+  display: block;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+sm|loc::before {
+  color: #6b7280;
+  content: "URL";
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+}
+
+xhtml|link {
+  color: #4b5563;
+  display: block;
+  font-size: 13px;
+  margin-top: 4px;
+  overflow-wrap: anywhere;
+}
+
+xhtml|link::before {
+  content: "Alternate " attr(hreflang) ": " attr(href);
+}
 `;
 }
 
