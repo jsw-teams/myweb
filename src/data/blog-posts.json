@@ -1,12 +1,44 @@
 {
   "zh-CN": [
     {
+      "title": "OpenWrt QModem 下 RM502Q-AE 无法接收短信的排障与恢复：IMS、5G SA 与短信承载配置",
+      "url": "https://blog.js.gripe/zh-CN/posts/rm502q-ae-openwrt-qmodem-sms-ims-fix/",
+      "date": "Wed, 29 Apr 2026 00:00:00 GMT",
+      "excerpt": "一次真实排障记录：QModem 页面收不到短信，最终定位为中国移动 NR5G SA 下 IMS 未开启；开启 IMS 并重启 RM502Q-AE 后，短信恢复接收。"
+    },
+    {
       "title": "技诉 Blog 正式启用",
       "url": "https://blog.js.gripe/zh-CN/posts/welcome/",
       "date": "Mon, 27 Apr 2026 00:00:00 GMT",
       "excerpt": "这里会记录技术实践、网络服务、写作与观察，也留下一些问题被解决前后的痕迹。"
     }
   ],
-  "zh-TW": [],
-  "en": []
+  "zh-TW": [
+    {
+      "title": "OpenWrt QModem 下 RM502Q-AE 無法接收簡訊的排障與恢復：IMS、5G SA 與簡訊承載設定",
+      "url": "https://blog.js.gripe/zh-TW/posts/rm502q-ae-openwrt-qmodem-sms-ims-fix/",
+      "date": "Wed, 29 Apr 2026 00:00:00 GMT",
+      "excerpt": "一次真實排障記錄：QModem 頁面收不到簡訊，最後定位為中國移動 NR5G SA 下 IMS 未開啟；開啟 IMS 並重啟 RM502Q-AE 後，簡訊恢復接收。"
+    },
+    {
+      "title": "技訴 Blog 正式啟用",
+      "url": "https://blog.js.gripe/zh-TW/posts/welcome/",
+      "date": "Mon, 27 Apr 2026 00:00:00 GMT",
+      "excerpt": "這裏會記錄技術實踐、網絡服務、寫作與觀察，也留下一些問題被解決前後的痕跡。"
+    }
+  ],
+  "en": [
+    {
+      "title": "Fixing SMS Reception on RM502Q-AE with OpenWrt QModem: IMS, 5G SA, and SMS Bearer Settings",
+      "url": "https://blog.js.gripe/en/posts/rm502q-ae-openwrt-qmodem-sms-ims-fix/",
+      "date": "Wed, 29 Apr 2026 00:00:00 GMT",
+      "excerpt": "A real troubleshooting note: QModem showed no incoming SMS, and the root cause was IMS being disabled while the RM502Q-AE was registered on China Mo..."
+    },
+    {
+      "title": "Blog.js.gripe is online",
+      "url": "https://blog.js.gripe/en/posts/welcome/",
+      "date": "Mon, 27 Apr 2026 00:00:00 GMT",
+      "excerpt": "A quiet place for technical practice, web services, writing notes, and the trail left by solved problems."
+    }
+  ]
 }

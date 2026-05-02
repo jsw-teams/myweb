@@ -17,8 +17,8 @@ export async function generateSeoFiles(options = {}) {
   }
 
   await fs.rm(path.join(distDir, 'sitemap.xsl'), { force: true });
+  await fs.rm(path.join(distDir, 'sitemap.css'), { force: true });
   await fs.writeFile(path.join(distDir, 'sitemap.xml'), buildSitemap(pages), 'utf8');
-  await fs.writeFile(path.join(distDir, 'sitemap.css'), buildSitemapCss(), 'utf8');
   await fs.writeFile(path.join(distDir, 'robots.txt'), buildRobotsTxt(siteUrl), 'utf8');
   await fs.writeFile(path.join(distDir, 'llms.txt'), buildLlmsTxt(siteUrl, pages), 'utf8');
   await fs.writeFile(path.join(distDir, 'llms-full.txt'), buildLlmsFullTxt(siteUrl, pages, markdownFiles), 'utf8');
@@ -56,6 +56,7 @@ async function collectPages(distDir, siteUrl) {
     const page = {
       url: canonical,
       path: new URL(canonical).pathname,
+      lastmod: await getLastmod(filePath),
       title: getTitle(html) || canonical,
       description: getMetaContent(html, 'name', 'description') ?? '',
       markdownUrl,
@@ -92,6 +93,11 @@ async function collectMarkdownFiles(distDir, siteUrl) {
   }
 
   return items.sort(compareByUrlPath);
+}
+
+async function getLastmod(filePath) {
+  const stats = await fs.stat(filePath);
+  return stats.mtime.toISOString();
 }
 
 async function findFiles(dir, includeFile) {
@@ -184,11 +190,59 @@ function normalizeUrl(value, siteUrl) {
 }
 
 function compareByUrlPath(left, right) {
-  const leftPath = new URL(left.url).pathname;
-  const rightPath = new URL(right.url).pathname;
-  if (leftPath === '/') return rightPath === '/' ? 0 : -1;
-  if (rightPath === '/') return 1;
-  return leftPath.localeCompare(rightPath, 'en');
+  const leftKey = getRouteSortKey(left.url);
+  const rightKey = getRouteSortKey(right.url);
+  return leftKey.localeCompare(rightKey, 'en');
+}
+
+function getRouteSortKey(url) {
+  const pathname = new URL(url).pathname;
+  const parts = pathname.split('/').filter(Boolean);
+  const lang = getPathLanguage(parts);
+  const routeParts = lang ? parts.slice(1) : parts;
+  const routePath = routeParts.join('/');
+  return [
+    String(getRouteRank(routeParts)).padStart(2, '0'),
+    routePath || '~',
+    String(getLanguageRank(lang)).padStart(2, '0'),
+    pathname
+  ].join('|');
+}
+
+function getPathLanguage(parts) {
+  const first = parts[0];
+  return ['zh-CN', 'zh-TW', 'en'].includes(first) ? first : '';
+}
+
+function getLanguageRank(lang) {
+  return {
+    '': 0,
+    'zh-CN': 0,
+    'zh-TW': 1,
+    en: 2
+  }[lang] ?? 9;
+}
+
+function getRouteRank(parts) {
+  if (parts.length === 0) return 0;
+
+  const [section] = parts;
+  const primaryRanks = {
+    about: 10,
+    contact: 11,
+    friends: 12,
+    privacy: 13,
+    projects: 14,
+    writing: 15
+  };
+
+  if (section in primaryRanks) return primaryRanks[section];
+  if (section === 'archive') return 30;
+  if (section === 'categories') return parts.length === 1 ? 31 : 40;
+  if (section === 'tags') return parts.length === 1 ? 32 : 41;
+  if (section === 'posts') return 50;
+  if (section === 'search') return 90;
+  return 60;
 }
 
 function buildSitemap(pages) {
@@ -200,80 +254,15 @@ function buildSitemap(pages) {
     const alternateLinks = page.alternates.map((alternate) => (
       `    <xhtml:link rel="alternate" hreflang="${xmlEscape(alternate.hreflang)}" href="${xmlEscape(alternate.href)}" />`
     ));
-    const children = [`    <loc>${xmlEscape(page.url)}</loc>`, ...alternateLinks].join('\n');
+    const children = [
+      `    <loc>${xmlEscape(page.url)}</loc>`,
+      `    <lastmod>${xmlEscape(page.lastmod)}</lastmod>`,
+      ...alternateLinks
+    ].join('\n');
     return `  <url>\n${children}\n  </url>`;
   }).join('\n');
 
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<?xml-stylesheet type="text/css" href="/sitemap.css"?>\n<urlset${namespace}>\n${urls}\n</urlset>\n`;
-}
-
-function buildSitemapCss() {
-  return `@namespace sm url("http://www.sitemaps.org/schemas/sitemap/0.9");
-@namespace xhtml url("http://www.w3.org/1999/xhtml");
-
-sm|urlset {
-  color: #111827;
-  display: block;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  line-height: 1.5;
-  margin: 0;
-  max-width: 1120px;
-  padding: 32px;
-}
-
-sm|urlset::before {
-  content: "Sitemap";
-  display: block;
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 8px;
-}
-
-sm|urlset::after {
-  color: #4b5563;
-  content: "Generated from the built static routes. Crawlers should read the XML source.";
-  display: block;
-  font-size: 14px;
-  margin-top: 24px;
-}
-
-sm|url {
-  border-bottom: 1px solid #e5e7eb;
-  display: block;
-  padding: 12px 0;
-}
-
-sm|loc {
-  color: #0f766e;
-  display: block;
-  font-weight: 600;
-  overflow-wrap: anywhere;
-}
-
-sm|loc::before {
-  color: #6b7280;
-  content: "URL";
-  display: block;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .04em;
-  margin-bottom: 2px;
-  text-transform: uppercase;
-}
-
-xhtml|link {
-  color: #4b5563;
-  display: block;
-  font-size: 13px;
-  margin-top: 4px;
-  overflow-wrap: anywhere;
-}
-
-xhtml|link::before {
-  content: "Alternate " attr(hreflang) ": " attr(href);
-}
-`;
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset${namespace}>\n${urls}\n</urlset>\n`;
 }
 
 function buildRobotsTxt(siteUrl) {
