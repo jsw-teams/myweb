@@ -5,6 +5,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const projectRoot = fileURLToPath(new URL('..', import.meta.url));
 const defaultDistDir = path.join(projectRoot, 'dist');
+const legacySitemapViewFiles = ['sitemap.xsl', 'sitemap.css'];
 
 export async function generateSeoFiles(options = {}) {
   const distDir = path.resolve(options.distDir ?? defaultDistDir);
@@ -16,8 +17,7 @@ export async function generateSeoFiles(options = {}) {
     throw new Error(`No HTML pages were found in ${distDir}`);
   }
 
-  await fs.rm(path.join(distDir, 'sitemap.xsl'), { force: true });
-  await fs.rm(path.join(distDir, 'sitemap.css'), { force: true });
+  await removeLegacySitemapViewFiles(distDir);
   await fs.writeFile(path.join(distDir, 'sitemap.xml'), buildSitemap(pages), 'utf8');
   await fs.writeFile(path.join(distDir, 'robots.txt'), buildRobotsTxt(siteUrl), 'utf8');
   await fs.writeFile(path.join(distDir, 'llms.txt'), buildLlmsTxt(siteUrl, pages), 'utf8');
@@ -27,6 +27,12 @@ export async function generateSeoFiles(options = {}) {
     pages: pages.length,
     markdownFiles: markdownFiles.length
   };
+}
+
+async function removeLegacySitemapViewFiles(distDir) {
+  await Promise.all(
+    legacySitemapViewFiles.map((fileName) => fs.rm(path.join(distDir, fileName), { force: true }))
+  );
 }
 
 async function getAstroSiteUrl(root) {
