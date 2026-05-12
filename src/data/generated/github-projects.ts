@@ -19,6 +19,21 @@ export type GeneratedGitHubProject = {
 
 export const githubProjects: GeneratedGitHubProject[] = [
   {
+    "name": "myweb",
+    "fullName": "jsw-teams/myweb",
+    "description": "",
+    "url": "https://github.com/jsw-teams/myweb",
+    "homepage": "",
+    "language": "Astro",
+    "topics": [],
+    "stars": 0,
+    "forks": 0,
+    "pushedAt": "2026-05-12T09:19:59Z",
+    "updatedAt": "2026-05-12T09:20:03Z",
+    "archived": false,
+    "source": "github"
+  },
+  {
     "name": "mydquery",
     "fullName": "jsw-teams/mydquery",
     "description": "Public dquery DNS-over-HTTPS gateway and Astro query frontend",
@@ -77,21 +92,6 @@ export const githubProjects: GeneratedGitHubProject[] = [
     "updatedAt": "2026-05-03T03:38:50Z",
     "archived": false,
     "source": "github"
-  },
-  {
-    "name": "myweb",
-    "fullName": "jsw-teams/myweb",
-    "description": "",
-    "url": "https://github.com/jsw-teams/myweb",
-    "homepage": "",
-    "language": "Astro",
-    "topics": [],
-    "stars": 0,
-    "forks": 0,
-    "pushedAt": "2026-05-02T22:38:05Z",
-    "updatedAt": "2026-05-02T22:38:09Z",
-    "archived": false,
-    "source": "github"
   }
 ];
-export const githubProjectsGeneratedAt = "2026-05-12T09:19:24.867Z";
+export const githubProjectsGeneratedAt = "2026-05-12T09:39:10.355Z";

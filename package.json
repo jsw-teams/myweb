@@ -10,7 +10,7 @@
     "dev": "astro dev",
     "prebuild": "node scripts/sync-blog-feed.mjs && node scripts/sync-github-projects.mjs",
     "build": "astro build",
-    "postbuild": "node scripts/generate-seo-files.mjs",
+    "postbuild": "node scripts/generate-markdown-from-html.mjs && node scripts/generate-seo-files.mjs",
     "preview": "astro preview",
     "check": "astro check"
   },
