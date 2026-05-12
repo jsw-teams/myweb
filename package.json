@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "sync:blog": "node scripts/sync-blog-feed.mjs",
-    "predev": "node scripts/sync-blog-feed.mjs",
+    "sync:projects": "node scripts/sync-github-projects.mjs",
+    "predev": "node scripts/sync-blog-feed.mjs && node scripts/sync-github-projects.mjs",
     "dev": "astro dev",
-    "prebuild": "node scripts/sync-blog-feed.mjs",
+    "prebuild": "node scripts/sync-blog-feed.mjs && node scripts/sync-github-projects.mjs",
     "build": "astro build",
     "postbuild": "node scripts/generate-seo-files.mjs",
     "preview": "astro preview",

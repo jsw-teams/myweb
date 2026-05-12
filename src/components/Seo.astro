@@ -17,7 +17,7 @@ const breadcrumbs = getBreadcrumbs(lang, page);
 const title = overrides.title ?? seo.title;
 const description = overrides.description ?? seo.description;
 const canonical = overrides.canonical ?? seo.canonical;
-const image = overrides.image ?? seo.image;
+const image = overrides.image ?? absoluteUrl(site.ogImage);
 const robots = overrides.robots ?? 'index, follow';
 const includeAlternates = overrides.includeAlternates ?? true;
 const includeMarkdownAlternate = overrides.includeMarkdownAlternate ?? true;
@@ -37,7 +37,7 @@ const structuredData = [
     '@type': 'Person',
     name: site.name,
     url: site.url,
-    image: absoluteUrl(site.icon)
+    image: absoluteUrl(site.ogImage)
   },
   {
     '@context': 'https://schema.org',
@@ -55,8 +55,8 @@ const structuredData = [
 <meta name="description" content={description} />
 <meta name="robots" content={robots} />
 <link rel="canonical" href={canonical} />
-<link rel="icon" href={site.icon} />
-<link rel="apple-touch-icon" href={site.icon} />
+<link rel="icon" type="image/png" href={site.favicon} />
+<link rel="apple-touch-icon" href={site.appleTouchIcon} />
 {includeMarkdownAlternate && <link rel="alternate" type="text/markdown" href={getMarkdownPath(lang, page)} />}
 {includeAlternates && seo.alternates.map((alternate) => (
   <link rel="alternate" hreflang={alternate.lang} href={alternate.href} />

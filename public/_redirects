@@ -11,6 +11,8 @@
 /zh-CN/writing /writing/ 301
 /zh-CN/writing/ /writing/ 301
 
+/favicon.ico /assets/brand/site-icon.png 200
+
 /sitemap.xsl /404.html 404
 /sitemap.css /404.html 404
 

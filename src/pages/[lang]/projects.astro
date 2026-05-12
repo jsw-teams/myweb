@@ -31,8 +31,20 @@ const projects = getPublicProjects();
         projects.map((project) => (
           <article class="entry-card">
             <h2>{project.name}</h2>
-            <p>{project.description}</p>
-            <a class="button-link" href={project.url} rel="noopener noreferrer">{project.url}</a>
+            {project.description && <p>{project.description}</p>}
+            <p class="article-meta">
+              {project.language && <span>{project.language}</span>}
+              {typeof project.stars === 'number' && <span> · ★ {project.stars}</span>}
+              {typeof project.forks === 'number' && <span> · Forks {project.forks}</span>}
+              {project.pushedAt && <span> · Updated {new Date(project.pushedAt).toLocaleDateString(lang)}</span>}
+            </p>
+            {project.topics && project.topics.length > 0 && (
+              <p>{project.topics.slice(0, 6).map((topic) => `#${topic}`).join(' ')}</p>
+            )}
+            <p>
+              <a class="button-link" href={project.url} rel="noopener noreferrer">GitHub</a>
+              {project.homepage && <a class="button-link" href={project.homepage} rel="noopener noreferrer">Website</a>}
+            </p>
           </article>
         ))
       )}
