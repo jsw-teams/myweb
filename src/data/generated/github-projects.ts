@@ -19,17 +19,17 @@ export type GeneratedGitHubProject = {
 
 export const githubProjects: GeneratedGitHubProject[] = [
   {
-    "name": "myweb",
-    "fullName": "jsw-teams/myweb",
-    "description": "",
-    "url": "https://github.com/jsw-teams/myweb",
+    "name": "myfiles",
+    "fullName": "jsw-teams/myfiles",
+    "description": "JS.Gripe file service with account-system login and tgbots storage",
+    "url": "https://github.com/jsw-teams/myfiles",
     "homepage": "",
-    "language": "Astro",
+    "language": "",
     "topics": [],
     "stars": 0,
     "forks": 0,
-    "pushedAt": "2026-05-12T09:19:59Z",
-    "updatedAt": "2026-05-12T09:20:03Z",
+    "pushedAt": "2026-05-13T09:52:02Z",
+    "updatedAt": "2026-05-13T09:52:03Z",
     "archived": false,
     "source": "github"
   },
@@ -43,8 +43,23 @@ export const githubProjects: GeneratedGitHubProject[] = [
     "topics": [],
     "stars": 0,
     "forks": 0,
-    "pushedAt": "2026-05-11T14:13:34Z",
+    "pushedAt": "2026-05-12T16:47:02Z",
     "updatedAt": "2026-05-11T14:20:19Z",
+    "archived": false,
+    "source": "github"
+  },
+  {
+    "name": "myweb",
+    "fullName": "jsw-teams/myweb",
+    "description": "",
+    "url": "https://github.com/jsw-teams/myweb",
+    "homepage": "",
+    "language": "Astro",
+    "topics": [],
+    "stars": 0,
+    "forks": 0,
+    "pushedAt": "2026-05-12T09:46:56Z",
+    "updatedAt": "2026-05-12T09:47:26Z",
     "archived": false,
     "source": "github"
   },
@@ -77,21 +92,6 @@ export const githubProjects: GeneratedGitHubProject[] = [
     "updatedAt": "2026-05-10T08:28:30Z",
     "archived": false,
     "source": "github"
-  },
-  {
-    "name": "mypicture",
-    "fullName": "jsw-teams/mypicture",
-    "description": "",
-    "url": "https://github.com/jsw-teams/mypicture",
-    "homepage": "",
-    "language": "Go",
-    "topics": [],
-    "stars": 0,
-    "forks": 0,
-    "pushedAt": "2026-05-03T03:28:22Z",
-    "updatedAt": "2026-05-03T03:38:50Z",
-    "archived": false,
-    "source": "github"
   }
 ];
-export const githubProjectsGeneratedAt = "2026-05-12T09:39:10.355Z";
+export const githubProjectsGeneratedAt = "2026-05-13T09:55:09.365Z";
