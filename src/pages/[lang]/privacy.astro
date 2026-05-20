@@ -19,9 +19,15 @@ const t = messages[lang];
     <h1 id="page-title">{t.pages.privacy.heading}</h1>
   </section>
   <section class="panel" aria-label={t.pages.privacy.heading}>
-    <ul class="plain-list">
-      {t.privacy.points.map((point) => <li>{point}</li>)}
-    </ul>
+    <p>{t.privacy.lead}</p>
+    {t.privacy.sections.map((section, index) => (
+      <section aria-labelledby={`privacy-section-${index + 1}`}>
+        <h2 id={`privacy-section-${index + 1}`}>{section.heading}</h2>
+        <ul class="plain-list">
+          {section.points.map((point) => <li>{point}</li>)}
+        </ul>
+      </section>
+    ))}
     <p><a class="button-link" href={getPagePath(lang, 'contact')}>{t.privacy.contactCta}</a></p>
   </section>
 </BaseLayout>

@@ -40,7 +40,11 @@ type Messages = {
     mascotAlt: string;
   };
   privacy: {
-    points: string[];
+    lead: string;
+    sections: Array<{
+      heading: string;
+      points: string[];
+    }>;
     contactCta: string;
   };
   friends: {
@@ -95,11 +99,40 @@ export const messages: Record<Lang, Messages> = {
       mascotAlt: '技诉正在电脑前写作的黑熊吉祥物'
     },
     privacy: {
-      points: [
-        '默认不主动收集个人信息。',
-        '可能使用 Cloudflare Web Analytics 等隐私友好的分析插件了解页面访问情况；在需要同意的地区，会先征得同意后再加载。',
-        '访问日志与安全日志可能由基础设施产生。',
-        '隐私相关请求可通过联系方式页面提出。'
+      lead: '本政策说明 JS.Gripe 如何处理访问、分析插件和公开联系信息。网站面向不同国家和地区访客，因此非必要分析插件采用更保守的默认设置：先提供选择，再加载。',
+      sections: [
+        {
+          heading: '我们处理的信息',
+          points: [
+            '默认不要求注册，也不主动通过表单收集个人信息。',
+            '访问日志、安全日志、错误日志和基础设施日志可能由服务器、CDN、防护服务或托管环境自动产生。',
+            '如果你通过邮件联系，来信地址、邮件内容和必要的邮件元数据会用于回复、排障和支持记录。'
+          ]
+        },
+        {
+          heading: '分析插件与同意',
+          points: [
+            'Cloudflare Web Analytics 等非必要分析插件只用于了解页面访问量、性能和基本使用趋势，不用于定向广告。',
+            '非必要分析插件默认关闭；你可以全部拒绝、全部接受，或在隐私偏好中心按类别管理。',
+            '如果浏览器发送 Global Privacy Control 或 Do Not Track 信号，非必要插件会保持关闭。'
+          ]
+        },
+        {
+          heading: '地区化权利与选择',
+          points: [
+            '在欧盟、英国、瑞士及类似同意优先地区，非必要插件仅在同意后加载，拒绝与接受同样容易，且可以通过“隐私设置”撤回。',
+            '在美国部分州，我们尊重适用的退出偏好信号，并提供退出共享、定向广告或非必要分析的选择。',
+            '在日本，我们会说明第三方外部传送目的、接收方和用途；Cookie 等端末识别子可能被视为个人相关信息。'
+          ]
+        },
+        {
+          heading: '保留、请求与安全',
+          points: [
+            '日志和支持邮件只在提供服务、安全、防滥用、排障或履行合理请求所需期间保留。',
+            '隐私相关请求、访问/更正/删除请求或撤回同意问题，可通过联系方式页面提出。',
+            '请不要通过公开页面或普通邮件发送密码、密钥、令牌、证件号、支付资料等敏感信息。'
+          ]
+        }
       ],
       contactCta: '查看联系方式'
     },
@@ -132,7 +165,7 @@ export const messages: Record<Lang, Messages> = {
       },
       privacy: {
         title: '隐私政策 / JS.Gripe',
-        description: 'JS.Gripe 的简洁隐私说明。',
+        description: 'JS.Gripe 关于访问日志、分析插件、地区化隐私选择和联系信息的说明。',
         heading: '隐私政策'
       },
       friends: {
@@ -185,11 +218,40 @@ export const messages: Record<Lang, Messages> = {
       mascotAlt: '技訴正在電腦前寫作的黑熊吉祥物'
     },
     privacy: {
-      points: [
-        '預設不主動收集個人資訊。',
-        '可能使用 Cloudflare Web Analytics 等隱私友善的分析插件了解頁面訪問情況；在需要同意的地區，會先徵得同意後再載入。',
-        '訪問日誌與安全日誌可能由基礎設施產生。',
-        '隱私相關請求可透過聯絡方式頁面提出。'
+      lead: '本政策說明 JS.Gripe 如何處理訪問、分析外掛和公開聯絡資訊。網站面向不同國家和地區訪客，因此非必要分析外掛採用更保守的預設設定：先提供選擇，再載入。',
+      sections: [
+        {
+          heading: '我們處理的資訊',
+          points: [
+            '預設不要求註冊，也不主動透過表單收集個人資訊。',
+            '訪問日誌、安全日誌、錯誤日誌和基礎設施日誌可能由伺服器、CDN、防護服務或託管環境自動產生。',
+            '如果你透過電子郵件聯絡，來信地址、郵件內容和必要的郵件中繼資料會用於回覆、排障和支援記錄。'
+          ]
+        },
+        {
+          heading: '分析外掛與同意',
+          points: [
+            'Cloudflare Web Analytics 等非必要分析外掛只用於了解頁面訪問量、效能和基本使用趨勢，不用於定向廣告。',
+            '非必要分析外掛預設關閉；你可以全部拒絕、全部接受，或在隱私偏好中心依類別管理。',
+            '如果瀏覽器送出 Global Privacy Control 或 Do Not Track 訊號，非必要外掛會保持關閉。'
+          ]
+        },
+        {
+          heading: '地區化權利與選擇',
+          points: [
+            '在歐盟、英國、瑞士及類似同意優先地區，非必要外掛僅在同意後載入，拒絕與接受同樣容易，且可以透過「隱私設定」撤回。',
+            '在美國部分州，我們尊重適用的退出偏好訊號，並提供退出共享、定向廣告或非必要分析的選擇。',
+            '在日本，我們會說明第三方外部傳送目的、接收方和用途；Cookie 等端末識別子可能被視為個人相關資訊。'
+          ]
+        },
+        {
+          heading: '保留、請求與安全',
+          points: [
+            '日誌和支援郵件只在提供服務、安全、防濫用、排障或履行合理請求所需期間保留。',
+            '隱私相關請求、存取/更正/刪除請求或撤回同意問題，可透過聯絡方式頁面提出。',
+            '請不要透過公開頁面或普通郵件傳送密碼、金鑰、權杖、證件號、支付資料等敏感資訊。'
+          ]
+        }
       ],
       contactCta: '查看聯絡方式'
     },
@@ -222,7 +284,7 @@ export const messages: Record<Lang, Messages> = {
       },
       privacy: {
         title: '隱私政策 / JS.Gripe',
-        description: 'JS.Gripe 的簡潔隱私說明。',
+        description: 'JS.Gripe 關於訪問日誌、分析外掛、地區化隱私選擇和聯絡資訊的說明。',
         heading: '隱私政策'
       },
       friends: {
@@ -275,11 +337,40 @@ export const messages: Record<Lang, Messages> = {
       mascotAlt: 'JS.Gripe black bear mascot writing at a computer'
     },
     privacy: {
-      points: [
-        'This site does not actively collect personal information by default.',
-        'Privacy-minded analytics plugins such as Cloudflare Web Analytics may be used to understand page visits; in regions where consent is appropriate, they load only after consent.',
-        'Access logs and security logs may be produced by infrastructure.',
-        'Privacy requests can be sent through the contact page.'
+      lead: 'This policy explains how JS.Gripe handles visits, optional analytics plugins, and public contact information. Because the site can be visited from many countries and regions, optional analytics use a conservative default: choices first, loading later.',
+      sections: [
+        {
+          heading: 'Information We Process',
+          points: [
+            'The site does not require registration by default and does not actively collect personal information through forms.',
+            'Access logs, security logs, error logs, and infrastructure logs may be produced automatically by servers, CDN, protection services, or hosting providers.',
+            'If you contact us by email, your address, message content, and necessary email metadata are used to reply, troubleshoot, and keep support records.'
+          ]
+        },
+        {
+          heading: 'Analytics Plugins And Consent',
+          points: [
+            'Optional analytics plugins such as Cloudflare Web Analytics are used only to understand page visits, performance, and basic usage trends. They are not used for targeted advertising.',
+            'Optional analytics plugins are off by default. You can reject all, accept all, or manage categories in the privacy preference center.',
+            'If the browser sends a Global Privacy Control or Do Not Track signal, optional plugins remain off.'
+          ]
+        },
+        {
+          heading: 'Regional Rights And Choices',
+          points: [
+            'In EU, UK, Swiss, and similar consent-first regions, optional plugins load only after consent; rejecting is as easy as accepting, and consent can be withdrawn through Privacy settings.',
+            'In applicable US states, we honor opt-out preference signals where required and provide choices to opt out of sharing, targeted advertising, or optional analytics.',
+            'For Japan, we describe third-party external transmission purposes, recipients, and use; cookie-like device identifiers may be treated as personally referable information.'
+          ]
+        },
+        {
+          heading: 'Retention, Requests, And Safety',
+          points: [
+            'Logs and support emails are retained only as needed to provide the site, keep it secure, prevent abuse, troubleshoot, or handle reasonable requests.',
+            'Privacy requests, access/correction/deletion requests, or consent withdrawal questions can be sent through the contact page.',
+            'Please do not send passwords, keys, tokens, identity documents, payment data, or other sensitive information through public pages or ordinary email.'
+          ]
+        }
       ],
       contactCta: 'View contact options'
     },
@@ -312,7 +403,7 @@ export const messages: Record<Lang, Messages> = {
       },
       privacy: {
         title: 'Privacy / JS.Gripe',
-        description: 'A short privacy note for JS.Gripe.',
+        description: 'How JS.Gripe handles logs, analytics plugins, regional privacy choices, and contact information.',
         heading: 'Privacy'
       },
       friends: {

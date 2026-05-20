@@ -32,8 +32,8 @@ const t = messages[lang];
       ) : (
         contactLinks.map((item) => (
           <article class="entry-card">
-            <h2><a href={item.href} rel="noopener noreferrer">{item.label}</a></h2>
-            {item.note && <p>{item.note}</p>}
+            <h2><a href={item.href} rel="noopener noreferrer">{item.label[lang]}</a></h2>
+            {item.note && <p>{item.note[lang]}</p>}
           </article>
         ))
       )}
