@@ -6,6 +6,7 @@
   "scripts": {
     "sync:blog": "node scripts/sync-blog-feed.mjs",
     "sync:projects": "node scripts/sync-github-projects.mjs",
+    "sync:cookies": "node /opt/mycookies/scripts/sync-to-projects.mjs",
     "predev": "node scripts/sync-blog-feed.mjs && node scripts/sync-github-projects.mjs",
     "dev": "astro dev",
     "prebuild": "node scripts/sync-blog-feed.mjs && node scripts/sync-github-projects.mjs",
