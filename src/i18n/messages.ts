@@ -99,7 +99,7 @@ export const messages: Record<Lang, Messages> = {
       mascotAlt: '技诉正在电脑前写作的黑熊吉祥物'
     },
     privacy: {
-      lead: '本政策说明 JS.Gripe 如何处理访问、分析插件和公开联系信息。网站面向不同国家和地区访客，因此非必要分析插件采用更保守的默认设置：先提供选择，再加载。',
+      lead: '本政策说明 JS.Gripe 如何处理访问、必要项目、非必要分析插件和公开联系信息。网站面向不同国家和地区访客，因此非必要插件采用更保守的默认设置：先提供选择，再加载。',
       sections: [
         {
           heading: '我们处理的信息',
@@ -113,16 +113,25 @@ export const messages: Record<Lang, Messages> = {
           heading: '分析插件与同意',
           points: [
             'Cloudflare Web Analytics 等非必要分析插件只用于了解页面访问量、性能和基本使用趋势，不用于定向广告。',
-            '非必要分析插件默认关闭；你可以全部拒绝、全部接受，或在隐私偏好中心按类别管理。',
-            '如果浏览器发送 Global Privacy Control 或 Do Not Track 信号，非必要插件会保持关闭。'
+            '非必要分析插件默认关闭；你可以选择仅最小必要项目、全部接受，或在隐私偏好中心按类别管理。',
+            '如果浏览器发送 Global Privacy Control 或 Do Not Track 信号，非必要插件会默认保持关闭，但不会被错误标记为必要项目。'
+          ]
+        },
+        {
+          heading: '必要项目',
+          points: [
+            '必要项目只限提供你请求的页面或服务所需的功能，例如隐私选择存储、登录会话、安全防护、语言偏好、服务可用性和防滥用。',
+            '访问统计、广告、再营销、跨站跟踪、热力图、A/B 测试或非必要个性化不会放入必要项目。',
+            '必要项目会在隐私偏好中心单独披露；可选项目必须通过选择后才加载。'
           ]
         },
         {
           heading: '地区化权利与选择',
           points: [
-            '在欧盟、英国、瑞士及类似同意优先地区，非必要插件仅在同意后加载，拒绝与接受同样容易，且可以通过“隐私设置”撤回。',
-            '在美国部分州，我们尊重适用的退出偏好信号，并提供退出共享、定向广告或非必要分析的选择。',
-            '在日本，我们会说明第三方外部传送目的、接收方和用途；Cookie 等端末识别子可能被视为个人相关信息。'
+            '在欧盟地区和英国，非必要插件仅在同意后加载，拒绝与接受同样容易，且可以通过“隐私设置”撤回。',
+            '在加利福尼亚州，我们尊重适用的退出偏好信号；本站不销售个人信息，不使用定向广告，并提供关闭非必要分析的选择。',
+            '对于澳大利亚、巴西、加拿大、香港、台湾、印度、印度尼西亚、日本、沙特阿拉伯王国、澳门、马来西亚、墨西哥、菲律宾、俄罗斯、塞尔维亚、新加坡、韩国、斯里兰卡、泰国、土耳其、阿拉伯联合酋长国、越南、中国大陆及其他地区，我们采用清晰告知、目的限定、最小化、可撤回选择和必要项目单独披露的保守做法。',
+            '在日本等要求说明第三方外部传送的地区，我们会说明第三方接收方、目的和用途；在涉及跨境处理或服务提供商时，会按适用要求提供说明。'
           ]
         },
         {
@@ -218,7 +227,7 @@ export const messages: Record<Lang, Messages> = {
       mascotAlt: '技訴正在電腦前寫作的黑熊吉祥物'
     },
     privacy: {
-      lead: '本政策說明 JS.Gripe 如何處理訪問、分析外掛和公開聯絡資訊。網站面向不同國家和地區訪客，因此非必要分析外掛採用更保守的預設設定：先提供選擇，再載入。',
+      lead: '本政策說明 JS.Gripe 如何處理訪問、必要項目、非必要分析外掛和公開聯絡資訊。網站面向不同國家和地區訪客，因此非必要外掛採用更保守的預設設定：先提供選擇，再載入。',
       sections: [
         {
           heading: '我們處理的資訊',
@@ -232,16 +241,25 @@ export const messages: Record<Lang, Messages> = {
           heading: '分析外掛與同意',
           points: [
             'Cloudflare Web Analytics 等非必要分析外掛只用於了解頁面訪問量、效能和基本使用趨勢，不用於定向廣告。',
-            '非必要分析外掛預設關閉；你可以全部拒絕、全部接受，或在隱私偏好中心依類別管理。',
-            '如果瀏覽器送出 Global Privacy Control 或 Do Not Track 訊號，非必要外掛會保持關閉。'
+            '非必要分析外掛預設關閉；你可以選擇僅最小必要項目、全部接受，或在隱私偏好中心依類別管理。',
+            '如果瀏覽器送出 Global Privacy Control 或 Do Not Track 訊號，非必要外掛會預設保持關閉，但不會被錯誤標記為必要項目。'
+          ]
+        },
+        {
+          heading: '必要項目',
+          points: [
+            '必要項目只限提供你要求的頁面或服務所需的功能，例如隱私選擇儲存、登入工作階段、安全防護、語言偏好、服務可用性和防濫用。',
+            '訪問統計、廣告、再行銷、跨站追蹤、熱力圖、A/B 測試或非必要個人化不會放入必要項目。',
+            '必要項目會在隱私偏好中心單獨揭露；可選項目必須透過選擇後才載入。'
           ]
         },
         {
           heading: '地區化權利與選擇',
           points: [
-            '在歐盟、英國、瑞士及類似同意優先地區，非必要外掛僅在同意後載入，拒絕與接受同樣容易，且可以透過「隱私設定」撤回。',
-            '在美國部分州，我們尊重適用的退出偏好訊號，並提供退出共享、定向廣告或非必要分析的選擇。',
-            '在日本，我們會說明第三方外部傳送目的、接收方和用途；Cookie 等端末識別子可能被視為個人相關資訊。'
+            '在歐盟地區和英國，非必要外掛僅在同意後載入，拒絕與接受同樣容易，且可以透過「隱私設定」撤回。',
+            '在加利福尼亞州，我們尊重適用的退出偏好訊號；本站不銷售個人資訊，不使用定向廣告，並提供關閉非必要分析的選擇。',
+            '對於澳大利亞、巴西、加拿大、香港、台灣、印度、印度尼西亞、日本、沙烏地阿拉伯王國、澳門、馬來西亞、墨西哥、菲律賓、俄羅斯、塞爾維亞、新加坡、韓國、斯里蘭卡、泰國、土耳其、阿拉伯聯合大公國、越南、中國大陸及其他地區，我們採用清晰告知、目的限定、最小化、可撤回選擇和必要項目單獨揭露的保守做法。',
+            '在日本等要求說明第三方外部傳送的地區，我們會說明第三方接收方、目的和用途；在涉及跨境處理或服務提供者時，會按適用要求提供說明。'
           ]
         },
         {
@@ -337,7 +355,7 @@ export const messages: Record<Lang, Messages> = {
       mascotAlt: 'JS.Gripe black bear mascot writing at a computer'
     },
     privacy: {
-      lead: 'This policy explains how JS.Gripe handles visits, optional analytics plugins, and public contact information. Because the site can be visited from many countries and regions, optional analytics use a conservative default: choices first, loading later.',
+      lead: 'This policy explains how JS.Gripe handles visits, required services, optional analytics plugins, and public contact information. Because the site can be visited from many countries and regions, optional plugins use a conservative default: choices first, loading later.',
       sections: [
         {
           heading: 'Information We Process',
@@ -351,16 +369,25 @@ export const messages: Record<Lang, Messages> = {
           heading: 'Analytics Plugins And Consent',
           points: [
             'Optional analytics plugins such as Cloudflare Web Analytics are used only to understand page visits, performance, and basic usage trends. They are not used for targeted advertising.',
-            'Optional analytics plugins are off by default. You can reject all, accept all, or manage categories in the privacy preference center.',
-            'If the browser sends a Global Privacy Control or Do Not Track signal, optional plugins remain off.'
+            'Optional analytics plugins are off by default. You can keep only required services, accept all, or manage categories in the privacy preference center.',
+            'If the browser sends a Global Privacy Control or Do Not Track signal, optional plugins remain off by default, but they are not mislabeled as required.'
+          ]
+        },
+        {
+          heading: 'Required Services',
+          points: [
+            'Required services are limited to what is needed to provide the requested page or service, such as privacy-choice storage, login sessions, security protections, language preference, service availability, and abuse prevention.',
+            'Visit analytics, advertising, remarketing, cross-site tracking, heatmaps, A/B testing, or non-essential personalization are not placed in required services.',
+            'Required services are disclosed separately in the privacy preference center; optional services load only after a choice.'
           ]
         },
         {
           heading: 'Regional Rights And Choices',
           points: [
-            'In EU, UK, Swiss, and similar consent-first regions, optional plugins load only after consent; rejecting is as easy as accepting, and consent can be withdrawn through Privacy settings.',
-            'In applicable US states, we honor opt-out preference signals where required and provide choices to opt out of sharing, targeted advertising, or optional analytics.',
-            'For Japan, we describe third-party external transmission purposes, recipients, and use; cookie-like device identifiers may be treated as personally referable information.'
+            'In the European Union and the United Kingdom, optional plugins load only after consent; refusing is as easy as accepting, and consent can be withdrawn through Privacy settings.',
+            'In California, we honor applicable opt-out preference signals. This site does not sell personal information, does not use targeted advertising, and provides a choice to turn off optional analytics.',
+            'For Australia, Brazil, Canada, Hong Kong, Taiwan, India, Indonesia, Japan, the Kingdom of Saudi Arabia, Macau, Malaysia, Mexico, the Philippines, Russia, Serbia, Singapore, South Korea, Sri Lanka, Thailand, Turkey, the United Arab Emirates, Vietnam, mainland China, and other regions, we use a conservative approach: clear notice, purpose limitation, minimization, withdrawable choices, and separate disclosure of required services.',
+            'Where rules require external transmission or cross-border processing disclosures, including Japan and similar regimes, we describe the third-party recipient, purpose, and use where applicable.'
           ]
         },
         {
