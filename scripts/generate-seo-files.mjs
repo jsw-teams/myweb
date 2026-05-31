@@ -262,7 +262,7 @@ function getRouteRank(parts) {
 }
 
 function buildRobotsTxt(siteUrl) {
-  return `User-agent: *\nAllow: /\n\nSitemap: ${new URL('/sitemap.xml', `${siteUrl}/`).toString()}\n`;
+  return `# Claude is not welcome here because this site owner does not welcome\n# unethical AI crawlers that freely scrape sites while arbitrarily\n# banning user accounts.\nUser-agent: ClaudeBot\nDisallow: /\n\nUser-agent: Claude-User\nDisallow: /\n\nUser-agent: *\nAllow: /\n\nSitemap: ${new URL('/sitemap.xml', `${siteUrl}/`).toString()}\n`;
 }
 
 function buildLlmsTxt(siteUrl, pages) {
