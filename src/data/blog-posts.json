@@ -1,98 +1,98 @@
 {
   "zh-CN": [
     {
-      "title": "Codex 加载历史对话很慢：清理日志库并保留会话历史",
+      "title": "一周国际新闻：伊朗风险、香格里拉对话与台湾 AI 供应链",
+      "url": "https://blog.js.gripe/zh-CN/posts/weekly-world-news-2026-05-25/",
+      "date": "Sun, 31 May 2026 00:00:00 GMT",
+      "excerpt": "台北时间 2026-05-25 至 2026-05-31 国际新闻视频制作版：伊朗战争风险、霍尔木兹海峡冲击、香格里拉对话与 Nvidia 在台投资。"
+    },
+    {
+      "title": "从自建搜索引擎入门到放弃",
+      "url": "https://blog.js.gripe/zh-CN/posts/searchme-search-engine-from-start-to-give-up/",
+      "date": "Sun, 31 May 2026 00:00:00 GMT",
+      "excerpt": "一次 SearchMe 自建搜索引擎折腾记：从 SearXNG 出发，尝试权重排序、内存写入、local_index，再折腾 Apache Nutch 爬虫，最后回到 search.js.gripe 当前采用的 SearXNG 路线。"
+    },
+    {
+      "title": "一周国际新闻：伊朗谈判、基辅空袭与山西煤矿事故",
+      "url": "https://blog.js.gripe/zh-CN/posts/weekly-world-news-2026-05-18/",
+      "date": "Sun, 24 May 2026 00:00:00 GMT",
+      "excerpt": "台北时间 2026-05-18 至 2026-05-24 国际新闻视频制作版：伊朗与霍尔木兹谈判、基辅空袭、台湾军售、欧美关税、AI 芯片、洪灾高温与山西煤矿事故。"
+    },
+    {
+      "title": "Codex 历史对话加载很慢：先开个新对话让它自己诊断",
       "url": "https://blog.js.gripe/zh-CN/posts/codex-history-load-slow-maintenance/",
       "date": "Tue, 19 May 2026 00:00:00 GMT",
-      "excerpt": "一次 Codex 历史对话打开过久的排查记录：定位膨胀的 logs_2.sqlite，备份、清理低价值日志、压缩数据库，并提供可复用维护脚本。"
+      "excerpt": "Codex 历史对话加载慢时，不必一上来就手动翻数据库。更简单的做法是新开一个对话，让 Codex 判断原因并给出修复步骤。"
     },
     {
       "title": "北京握手，霍尔木兹仍在燃烧：上周世界发生了什么",
       "url": "https://blog.js.gripe/zh-CN/posts/weekly-world-news-2026-05-11/",
       "date": "Mon, 18 May 2026 00:00:00 GMT",
       "excerpt": "台北时间 2026-05-11 至 2026-05-17 国际新闻视频制作版：中美北京会晤、台湾议题、中东能源风险、俄乌无人机战、三星罢工风险、公共健康与文化新闻。"
-    },
-    {
-      "title": "使用 GitHub Webhook 实时监测项目变更，并触发博客重新部署",
-      "url": "https://blog.js.gripe/zh-CN/posts/github-webhook-blog-redeploy/",
-      "date": "Sun, 10 May 2026 00:00:00 GMT",
-      "excerpt": "基于 GitHub Webhook、签名校验和 Cloudflare Pages Deploy Hook，构建一个更安全的博客自动重部署流程。"
-    },
-    {
-      "title": "使用 VS Code Remote SSH 连接远程主机：从密钥到工作区",
-      "url": "https://blog.js.gripe/zh-CN/posts/vscode-remote-ssh-connect-host/",
-      "date": "Sun, 10 May 2026 00:00:00 GMT",
-      "excerpt": "在 Windows 上通过 VS Code Remote SSH 连接远程 Linux 主机，把远程目录当成本地项目一样编辑、运行和排障。"
-    },
-    {
-      "title": "把 VS Code 远程开发与 Codex 结合：让远程主机成为高效开发工作台",
-      "url": "https://blog.js.gripe/zh-CN/posts/vscode-remote-codex-dev-efficiency/",
-      "date": "Sun, 10 May 2026 00:00:00 GMT",
-      "excerpt": "通过 VS Code Remote SSH、Codex IDE 扩展和 Codex CLI，把远程主机上的真实项目环境变成可协作、可构建、可审查的开发工作台。"
     }
   ],
   "zh-TW": [
     {
-      "title": "Codex 載入歷史對話很慢：清理日誌庫並保留會話歷史",
+      "title": "一週國際新聞：伊朗風險、香格里拉對話與台灣 AI 供應鏈",
+      "url": "https://blog.js.gripe/zh-TW/posts/weekly-world-news-2026-05-25/",
+      "date": "Sun, 31 May 2026 00:00:00 GMT",
+      "excerpt": "台北時間 2026-05-25 至 2026-05-31 國際新聞影片製作版：伊朗戰爭風險、荷莫茲海峽衝擊、香格里拉對話與 Nvidia 在台投資。"
+    },
+    {
+      "title": "從自架搜尋引擎入門到放棄",
+      "url": "https://blog.js.gripe/zh-TW/posts/searchme-search-engine-from-start-to-give-up/",
+      "date": "Sun, 31 May 2026 00:00:00 GMT",
+      "excerpt": "一次 SearchMe 自架搜尋引擎的折騰紀錄：從 SearXNG 出發，試過權重排序、記憶體寫入、local_index，又折騰 Apache Nutch 爬蟲，最後回到 search.js.gripe 目前採用的 SearXNG 路線。"
+    },
+    {
+      "title": "一週國際新聞：伊朗談判、基輔空襲與山西煤礦事故",
+      "url": "https://blog.js.gripe/zh-TW/posts/weekly-world-news-2026-05-18/",
+      "date": "Sun, 24 May 2026 00:00:00 GMT",
+      "excerpt": "台北時間 2026-05-18 至 2026-05-24 國際新聞影片製作版：伊朗與荷莫茲談判、基輔空襲、台灣軍售、歐美關稅、AI 晶片、洪災高溫與山西煤礦事故。"
+    },
+    {
+      "title": "Codex 歷史對話載入很慢：先開個新對話讓它自己診斷",
       "url": "https://blog.js.gripe/zh-TW/posts/codex-history-load-slow-maintenance/",
       "date": "Tue, 19 May 2026 00:00:00 GMT",
-      "excerpt": "一次 Codex 歷史對話開啟過久的排查記錄：定位膨脹的 logs_2.sqlite，備份、清理低價值日誌、壓縮資料庫，並提供可重用維護腳本。"
+      "excerpt": "Codex 歷史對話載入慢時，不必一開始就手動翻資料庫。更簡單的做法是新開一個對話，讓 Codex 判斷原因並幫你清理歷史記錄。"
     },
     {
       "title": "北京握手，荷莫茲仍在燃燒：上週世界發生了什麼",
       "url": "https://blog.js.gripe/zh-TW/posts/weekly-world-news-2026-05-11/",
       "date": "Mon, 18 May 2026 00:00:00 GMT",
       "excerpt": "台北時間 2026-05-11 至 2026-05-17 國際新聞影片製作版：中美北京會晤、台灣議題、中東能源風險、俄烏無人機戰、三星罷工風險、公共健康與文化新聞。"
-    },
-    {
-      "title": "使用 GitHub Webhook 即時監測專案變更，並觸發部落格重新部署",
-      "url": "https://blog.js.gripe/zh-TW/posts/github-webhook-blog-redeploy/",
-      "date": "Sun, 10 May 2026 00:00:00 GMT",
-      "excerpt": "基於 GitHub Webhook、簽名校驗與 Cloudflare Pages Deploy Hook，建構一個更安全的部落格自動重新部署流程。"
-    },
-    {
-      "title": "使用 VS Code Remote SSH 連接遠端主機：從金鑰到工作區",
-      "url": "https://blog.js.gripe/zh-TW/posts/vscode-remote-ssh-connect-host/",
-      "date": "Sun, 10 May 2026 00:00:00 GMT",
-      "excerpt": "在 Windows 上透過 VS Code Remote SSH 連接遠端 Linux 主機，把遠端目錄當成本機專案一樣編輯、執行與除錯。"
-    },
-    {
-      "title": "把 VS Code 遠端開發與 Codex 結合：讓遠端主機成為高效開發工作台",
-      "url": "https://blog.js.gripe/zh-TW/posts/vscode-remote-codex-dev-efficiency/",
-      "date": "Sun, 10 May 2026 00:00:00 GMT",
-      "excerpt": "透過 VS Code Remote SSH、Codex IDE 擴充套件與 Codex CLI，把遠端主機上的真實專案環境變成可協作、可建置、可審查的開發工作台。"
     }
   ],
   "en": [
     {
-      "title": "When Codex History Loads Slowly: Trim the Log Database Without Losing Conversations",
+      "title": "From Building My Own Search Engine to Giving Up",
+      "url": "https://blog.js.gripe/en/posts/searchme-search-engine-from-start-to-give-up/",
+      "date": "Sun, 31 May 2026 00:00:00 GMT",
+      "excerpt": "A SearchMe postmortem: starting with SearXNG, trying weighted ranking, in-memory writes, local_index, then Apache Nutch, and finally returning to th..."
+    },
+    {
+      "title": "World News Weekly: Iran Risk, Shangri-La, and Taiwan's AI Supply Chain",
+      "url": "https://blog.js.gripe/en/posts/weekly-world-news-2026-05-25/",
+      "date": "Sun, 31 May 2026 00:00:00 GMT",
+      "excerpt": "Video edition for 2026-05-25 to 2026-05-31 Asia/Taipei time: Iran war risk, Hormuz pressure, the Shangri-La Dialogue, and Nvidia's Taiwan investment..."
+    },
+    {
+      "title": "World News Weekly: Iran Talks, Kyiv Strikes, and the Shanxi Mine Blast",
+      "url": "https://blog.js.gripe/en/posts/weekly-world-news-2026-05-18/",
+      "date": "Sun, 24 May 2026 00:00:00 GMT",
+      "excerpt": "Video edition for 2026-05-18 to 2026-05-24 Asia/Taipei time: Iran and Hormuz talks, Kyiv strikes, Taiwan arms sales, EU-US tariffs, AI chips, floods..."
+    },
+    {
+      "title": "Codex History Loading Slowly? Open a Fresh Chat and Let Codex Diagnose It",
       "url": "https://blog.js.gripe/en/posts/codex-history-load-slow-maintenance/",
       "date": "Tue, 19 May 2026 00:00:00 GMT",
-      "excerpt": "A practical Codex maintenance note: find an oversized logs_2.sqlite, back it up, remove low-value logs, vacuum the database, and reuse the included ..."
+      "excerpt": "When Codex history feels slow, do not start with database surgery. Open a new Codex chat, ask it to inspect safely, and let it suggest the fix."
     },
     {
       "title": "The Beijing Handshake, the Gulf Still Burning: What Happened Last Week",
       "url": "https://blog.js.gripe/en/posts/weekly-world-news-2026-05-11/",
       "date": "Mon, 18 May 2026 00:00:00 GMT",
       "excerpt": "A video-production weekly brief for 2026-05-11 to 2026-05-17 Asia/Taipei time: US-China talks in Beijing, Taiwan, Gulf energy risk, drone warfare in..."
-    },
-    {
-      "title": "Combining VS Code Remote Development with Codex: Turning a Remote Host into a Productive Workspace",
-      "url": "https://blog.js.gripe/en/posts/vscode-remote-codex-dev-efficiency/",
-      "date": "Sun, 10 May 2026 00:00:00 GMT",
-      "excerpt": "Use VS Code Remote SSH, the Codex IDE extension, and Codex CLI to turn a real remote project environment into a collaborative, buildable, and review..."
-    },
-    {
-      "title": "Using GitHub Webhooks to Monitor Project Changes and Redeploy a Blog",
-      "url": "https://blog.js.gripe/en/posts/github-webhook-blog-redeploy/",
-      "date": "Sun, 10 May 2026 00:00:00 GMT",
-      "excerpt": "Build a safer automated redeployment flow for a static blog using GitHub Webhooks, signature verification, and Cloudflare Pages Deploy Hooks."
-    },
-    {
-      "title": "Using VS Code Remote SSH to Connect to a Remote Host: From Keys to Workspace",
-      "url": "https://blog.js.gripe/en/posts/vscode-remote-ssh-connect-host/",
-      "date": "Sun, 10 May 2026 00:00:00 GMT",
-      "excerpt": "A practical Windows workflow for connecting VS Code to a remote Linux host over SSH and editing, running, and troubleshooting a project directly on ..."
     }
   ]
 }

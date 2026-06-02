@@ -2,6 +2,7 @@
 import LanguageLinks from '../components/LanguageLinks.astro';
 import MascotCard from '../components/MascotCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getProjectDescription } from '../data/project-descriptions';
 import { defaultLang, type PageKey } from '../i18n/config';
 import { messages } from '../i18n/messages';
 import { getPublicProjects } from '../lib/projects';
@@ -26,7 +27,9 @@ const projects = getPublicProjects();
         projects.map((project) => (
           <article class="entry-card">
             <h2>{project.name}</h2>
-            {project.description && <p>{project.description}</p>}
+            {getProjectDescription(project.fullName, lang, project.description) && (
+              <p>{getProjectDescription(project.fullName, lang, project.description)}</p>
+            )}
             <p class="article-meta">
               {project.language && <span>{project.language}</span>}
               {typeof project.stars === 'number' && <span> · ★ {project.stars}</span>}
@@ -37,8 +40,8 @@ const projects = getPublicProjects();
               <p>{project.topics.slice(0, 6).map((topic) => `#${topic}`).join(' ')}</p>
             )}
             <p>
-              <a class="button-link" href={project.url} rel="noopener noreferrer">GitHub</a>
-              {project.homepage && <a class="button-link" href={project.homepage} rel="noopener noreferrer">Website</a>}
+              <a class="button-link" href={project.url} rel="noopener noreferrer nofollow">GitHub</a>
+              {project.homepage && <a class="button-link" href={project.homepage} rel="noopener noreferrer nofollow">Website</a>}
             </p>
           </article>
         ))

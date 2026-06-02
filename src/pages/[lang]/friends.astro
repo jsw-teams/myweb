@@ -29,8 +29,8 @@ const t = messages[lang];
       ) : (
         friends.map((friend) => (
           <article class="entry-card">
-            <h2><a href={friend.url} rel="noopener noreferrer">{friend.name}</a></h2>
-            <p>{friend.description}</p>
+            <h2><a href={friend.url} rel="noopener noreferrer nofollow">{friend.name}</a></h2>
+            <p>{friend.description[lang]}</p>
             {friend.lang && <p>{t.friends.langLabel}: {friend.lang}</p>}
           </article>
         ))
