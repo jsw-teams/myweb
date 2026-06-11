@@ -25,6 +25,14 @@ npm audit
 
 部署完成后，可以在 GitHub Pages 的自定义域名设置里绑定 `js.gripe`。
 
+## Cloudflare CDN 缓存
+
+GitHub Pages 不支持通过仓库里的 `_headers` 文件设置响应头。若前面套 Cloudflare CDN，建议在 Cloudflare Cache Rules 中配置：
+
+- `js.gripe/_astro/*`、`js.gripe/assets/*`、`js.gripe/md/*`：Cache Everything，Edge TTL 30 天或更长。
+- `js.gripe/*.xml`、`js.gripe/*.txt`、`js.gripe/*.json`：Cache Everything，Edge TTL 1 小时到 1 天。
+- HTML 页面：保持默认或设置较短 Edge TTL，避免内容更新后长时间不刷新。
+
 ## 部署到 VPS / OpenResty
 
 推荐将构建产物通过 release 目录原子切换到：
