@@ -19,19 +19,11 @@ npm audit
 
 构建产物会生成在 `dist/`。
 
-## 部署到 Cloudflare Pages
+## 部署到 GitHub Pages
 
-1. 将这个项目推送到 GitHub 仓库。
-2. 打开 Cloudflare Dashboard，进入 **Workers & Pages**。
-3. 选择 **Create application**，再选择 **Pages**。
-4. 连接 GitHub，并选择这个仓库。
-5. 构建设置填写：
-   - Framework preset: `Astro`
-   - Build command: `npm run build`
-   - Build output directory: `dist`
-6. 保存并部署。
+推送到 `main` 后，GitHub Actions 会运行 `.github/workflows/pages.yml`，执行 `npm ci` 和 `npm run build`，然后把 `dist/` 发布到 GitHub Pages。
 
-部署完成后，可以在 Cloudflare Pages 的自定义域名设置里绑定 `js.gripe`。
+部署完成后，可以在 GitHub Pages 的自定义域名设置里绑定 `js.gripe`。
 
 ## 部署到 VPS / OpenResty
 
