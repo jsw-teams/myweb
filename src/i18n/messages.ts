@@ -14,6 +14,7 @@ type Messages = {
   navLabel: string;
   current: string;
   external: string;
+  sitemap: string;
   cards: {
     projects: string;
     writing: string;
@@ -68,6 +69,7 @@ export const messages: Record<Lang, Messages> = {
     navLabel: '主导航',
     current: '当前页面',
     external: '打开外部链接',
+    sitemap: '站点地图',
     cards: {
       projects: '项目',
       writing: '写作',
@@ -196,6 +198,7 @@ export const messages: Record<Lang, Messages> = {
     navLabel: '主導覽',
     current: '目前頁面',
     external: '開啟外部連結',
+    sitemap: '站點地圖',
     cards: {
       projects: '專案',
       writing: '寫作',
@@ -324,6 +327,7 @@ export const messages: Record<Lang, Messages> = {
     navLabel: 'Primary navigation',
     current: 'Current page',
     external: 'Open external link',
+    sitemap: 'Sitemap',
     cards: {
       projects: 'Projects',
       writing: 'Writing',
