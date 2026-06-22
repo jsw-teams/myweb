@@ -18,7 +18,7 @@ export async function generateSeoFiles(options = {}) {
   }
 
   await removeLegacySitemapViewFiles(distDir);
-  await copyAstroSitemap(distDir);
+  await writeSitemap(distDir, pages);
   await fs.writeFile(path.join(distDir, 'robots.txt'), buildRobotsTxt(siteUrl), 'utf8');
   await fs.writeFile(path.join(distDir, 'llms.txt'), buildLlmsTxt(siteUrl, pages), 'utf8');
   await fs.writeFile(path.join(distDir, 'llms-full.txt'), buildLlmsFullTxt(siteUrl, pages, markdownFiles), 'utf8');
@@ -29,14 +29,21 @@ export async function generateSeoFiles(options = {}) {
   };
 }
 
-async function copyAstroSitemap(distDir) {
-  const primary = path.join(distDir, 'sitemap-0.xml');
-  const canonical = path.join(distDir, 'sitemap.xml');
-  try {
-    await fs.copyFile(primary, canonical);
-  } catch {
-    throw new Error('Expected @astrojs/sitemap to generate sitemap-0.xml before SEO finalization.');
-  }
+async function writeSitemap(distDir, pages) {
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n` +
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n` +
+    pages.map((page) => `  <url>\n` +
+      `    <loc>${escapeXml(page.url)}</loc>\n` +
+      `    <lastmod>${escapeXml(page.lastmod)}</lastmod>\n` +
+      page.alternates.map((alternate) => `    <xhtml:link rel="alternate" hreflang="${escapeXml(alternate.hreflang)}" href="${escapeXml(alternate.href)}" />\n`).join('') +
+      `  </url>`).join('\n') +
+    `\n</urlset>\n`;
+
+  await Promise.all([
+    fs.rm(path.join(distDir, 'sitemap-index.xml'), { force: true }),
+    fs.rm(path.join(distDir, 'sitemap-0.xml'), { force: true })
+  ]);
+  await fs.writeFile(path.join(distDir, 'sitemap.xml'), xml, 'utf8');
 }
 
 async function removeLegacySitemapViewFiles(distDir) {
@@ -355,6 +362,14 @@ function decodeHtmlEntities(value) {
     .replace(/&#39;/g, "'")
     .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
     .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(Number.parseInt(code, 16)));
+}
+
+function escapeXml(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;');
 }
 
 function escapeRegExp(value) {
