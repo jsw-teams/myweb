@@ -91,9 +91,41 @@ dist/sitemap.xml
 
 `robots.txt`、`llms.txt`、`llms-full.txt` 和 Markdown 镜像由 `scripts/generate-seo-files.mjs` 在 `postbuild` 阶段生成。
 
-## 部署
+## 部署到 Cloudflare Pages
 
-推送到 `main` 后，GitHub Actions 会运行 `.github/workflows/pages.yml`，执行安装、检查和构建，并发布 `dist/` 到 GitHub Pages。
+Cloudflare Pages 可以直接连接 `jsw-teams/myweb` 仓库。
+
+推荐设置：
+
+```text
+Production branch: main
+Framework preset: Astro
+Build command: npm run build
+Build output directory: dist
+Root directory: /
+```
+
+环境变量建议：
+
+```text
+NODE_VERSION=22
+```
+
+项目展示由人工维护，不需要 GitHub 项目同步变量。构建前只会运行 `scripts/sync-blog-feed.mjs` 同步 myblog 文章索引；如果远端 feed 或本地 myblog 不可用，会保留已有的 `src/data/blog-posts.json`。
+
+自定义域名应与 [config.yml](config.yml) 的 `siteUrl` 保持一致。当前配置使用：
+
+```yaml
+siteUrl: https://www.js.gripe
+```
+
+Cloudflare Pages 会识别构建产物中的 `_headers` 和 `_redirects`。上线后确认这些入口可访问：
+
+```text
+/sitemap.xml
+/robots.txt
+/llms.txt
+```
 
 上线前建议确认：
 
