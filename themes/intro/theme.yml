@@ -1,5 +1,5 @@
-name: jishu-pixel
-description: JS.Gripe main-site theme derived from myblog default.
+name: intro
+description: Intro theme for the JS.Gripe public entry site, derived from myblog default structure.
 style: style.css
 script: scripts/consent.js
 templates: templates

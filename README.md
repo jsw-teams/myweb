@@ -2,7 +2,7 @@
 
 JS.Gripe 是基于 `myblog` 文件结构与主题思路二次开发的公开站点。这个仓库负责主站入口、页面内容、项目展示、联系方式、友情链接、隐私说明，以及从 myblog 文章索引加载的写作入口。
 
-当前主题为 `themes/jishu-pixel`。主题尽量沿用 myblog 的组织方式：主题配置、模板、样式和脚本放在主题目录内，站点页面只做必要装配。
+当前主题为 `themes/intro`。主题尽量沿用 myblog 的组织方式：主题配置、模板、样式和脚本放在主题目录内，站点页面只做必要装配。
 
 ## 站务配置
 
@@ -30,11 +30,11 @@ npm run build
 
 - 可编辑页面：`content/pages/<page>/index.<lang>.md`
 - Astro 页面壳：`src/pages/` 和 `src/pages/[lang]/`
-- 主题配置：`themes/jishu-pixel/theme.yml`
+- 主题配置：`themes/intro/theme.yml`
 - 站务配置：`config.yml`
-- 主题样式：`themes/jishu-pixel/style.css`
-- 页面样式：`themes/jishu-pixel/styles/`
-- 主题脚本：`themes/jishu-pixel/scripts/`
+- 主题样式：`themes/intro/style.css`
+- 页面样式：`themes/intro/styles/`
+- 主题脚本：`themes/intro/scripts/`
 - 吉祥物与站点图标：`public/assets/brand/`
 
 页面内容以 `zh-TW` 为主，并同步维护 `zh-CN` 与 `en`。

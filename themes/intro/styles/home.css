@@ -1,0 +1,7 @@
+.hero {
+  animation-delay: 40ms;
+}
+
+.entry-grid {
+  isolation: isolate;
+}

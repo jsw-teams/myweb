@@ -6,13 +6,11 @@ import type { Lang, PageKey } from '../i18n/config';
 import { messages } from '../i18n/messages';
 import type { SeoOverrides } from '../lib/seo';
 import { withBase } from '../lib/i18n';
-import '../../themes/jishu-pixel/style.css';
+import '../../themes/intro/style.css';
 import '../styles/global.css';
-import consentScriptUrl from '../../themes/jishu-pixel/scripts/consent.js?url';
-import consentStyleUrl from '../../themes/jishu-pixel/styles/consent.css?url';
-import siteIconsScriptUrl from '../../themes/jishu-pixel/scripts/site-icons.js?url';
-import webMcpScriptUrl from '../../themes/jishu-pixel/scripts/web-mcp.js?url';
-import themeConfigRaw from '../../themes/jishu-pixel/theme.yml?raw';
+import consentScriptUrl from '../../themes/intro/scripts/consent.js?url';
+import consentStyleUrl from '../../themes/intro/styles/consent.css?url';
+import themeConfigRaw from '../../themes/intro/theme.yml?raw';
 import { getThemeBodyEndScripts, getThemeBrowserConfig } from '../lib/theme-config';
 
 type Props = {
@@ -23,20 +21,16 @@ type Props = {
 
 const { lang, page, seo } = Astro.props;
 const t = messages[lang];
+const themeAssetUrls = {
+  'styles/consent.css': consentStyleUrl,
+  'scripts/site-icons.js': withBase('/assets/theme/intro/scripts/site-icons.js'),
+  'scripts/web-mcp.js': withBase('/assets/theme/intro/scripts/web-mcp.js')
+};
 const themeConfig = getThemeBrowserConfig(themeConfigRaw, {
   basePath: import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL.replace(/\/$/, ''),
   consentStyleUrl,
-  assetUrls: {
-    'styles/consent.css': consentStyleUrl,
-    'scripts/site-icons.js': siteIconsScriptUrl,
-    'scripts/web-mcp.js': webMcpScriptUrl
-  }
+  assetUrls: themeAssetUrls
 });
-const themeAssetUrls = {
-  'styles/consent.css': consentStyleUrl,
-  'scripts/site-icons.js': siteIconsScriptUrl,
-  'scripts/web-mcp.js': webMcpScriptUrl
-};
 const bodyEndScripts = getThemeBodyEndScripts(themeConfigRaw, withBase, themeAssetUrls);
 ---
 <!doctype html>

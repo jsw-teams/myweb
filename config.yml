@@ -22,7 +22,7 @@ author:
   zh-TW: 技訴
   en: JS.Gripe
 theme:
-  name: jishu-pixel
+  name: intro
 icons:
   favicon: /assets/brand/site-icon.png
   appleTouchIcon: /assets/brand/site-icon.png

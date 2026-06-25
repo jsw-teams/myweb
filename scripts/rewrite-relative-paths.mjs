@@ -18,9 +18,9 @@ function relativeUrl(fromDir, target) {
 }
 
 function rewriteHtml(html, fromDir) {
-  return html.replace(/\b(href|src)=["']\/(?!\/)([^"']+)["']/g, (match, attr, target) => {
+  return html.replace(/(\s)(href|src)=["']\/(?!\/)([^"']+)["']/g, (match, prefix, attr, target) => {
     if (/^(?:https?:|mailto:|tel:|#)/i.test(target)) return match;
-    return `${attr}="${relativeUrl(fromDir, target)}"`;
+    return `${prefix}${attr}="${relativeUrl(fromDir, target)}"`;
   });
 }
 

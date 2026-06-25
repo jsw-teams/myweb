@@ -20,7 +20,7 @@ export function parseSiteConfig(raw) {
     zhName: readMap(raw, 'zhName'),
     description: readMap(raw, 'description'),
     author: readMap(raw, 'author'),
-    theme: { name: readNestedScalar(raw, 'theme', 'name', 'jishu-pixel') },
+    theme: { name: readNestedScalar(raw, 'theme', 'name', 'intro') },
     icons: readMap(raw, 'icons'),
     sitemap: { entryLimit: Number(readNestedScalar(raw, 'sitemap', 'entryLimit', '50000')) },
     robots: {
