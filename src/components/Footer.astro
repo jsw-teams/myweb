@@ -14,6 +14,11 @@ type Props = {
 const { lang, page } = Astro.props;
 const t = messages[lang];
 const copyright = getFooterCopyright(themeConfig, lang, new Date().getUTCFullYear());
+const cookiePreferences = {
+  'zh-CN': 'Cookie 偏好设置',
+  'zh-TW': 'Cookie 偏好設定',
+  en: 'Cookie preferences'
+}[lang];
 ---
 <footer class="site-footer">
   {copyright && <p class="footer-brand">{copyright}</p>}
@@ -24,5 +29,6 @@ const copyright = getFooterCopyright(themeConfig, lang, new Date().getUTCFullYea
       </a>
     ))}
     <a href={withBase('/sitemap.xml')}>{t.sitemap}</a>
+    <button class="footer-link-button" type="button" data-consent-open>{cookiePreferences}</button>
   </nav>
 </footer>

@@ -569,18 +569,24 @@ p {
   font-weight: 700;
 }
 
-.footer-links a {
+.footer-links a,
+.footer-link-button {
   display: inline-flex;
   align-items: center;
+  appearance: none;
+  cursor: pointer;
   min-height: 40px;
   padding: 0.42rem 0.72rem;
   border: 1px solid transparent;
+  background: transparent;
   color: var(--accent);
+  font: inherit;
   text-decoration: none;
 }
 
 .footer-links a:hover,
-.footer-links a[aria-current="page"] {
+.footer-links a[aria-current="page"],
+.footer-link-button:hover {
   border-color: var(--border);
   background: var(--surface-2);
 }
