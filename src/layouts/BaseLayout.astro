@@ -10,6 +10,10 @@ import '../../themes/jishu-pixel/style.css';
 import '../styles/global.css';
 import consentScriptUrl from '../../themes/jishu-pixel/scripts/consent.js?url';
 import consentStyleUrl from '../../themes/jishu-pixel/styles/consent.css?url';
+import siteIconsScriptUrl from '../../themes/jishu-pixel/scripts/site-icons.js?url';
+import webMcpScriptUrl from '../../themes/jishu-pixel/scripts/web-mcp.js?url';
+import themeConfigRaw from '../../themes/jishu-pixel/theme.yml?raw';
+import { getThemeBodyEndScripts, getThemeBrowserConfig } from '../lib/theme-config';
 
 type Props = {
   lang: Lang;
@@ -19,35 +23,21 @@ type Props = {
 
 const { lang, page, seo } = Astro.props;
 const t = messages[lang];
-const themeConfig = {
-  locales: ['zh-CN', 'zh-TW', 'en'],
-  defaultLocale: 'zh-CN',
-  storageKey: 'js-gripe.locale',
+const themeConfig = getThemeBrowserConfig(themeConfigRaw, {
   basePath: import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL.replace(/\/$/, ''),
-  themeFeatures: {
-    webMcp: true
-  },
-  themeFeatureScripts: {
-    webMcp: withBase('/assets/agent-discovery.js')
-  },
-  themeFeatureStyles: {
-    consent: [consentStyleUrl]
-  },
-  themeFeatureCategories: {
-    webMcp: 'necessary'
-  },
-  themeConsent: {
-    enabled: true,
-    storageKey: 'js-gripe-consent',
-    revision: 1,
-    categories: {
-      necessary: { required: true },
-      preferences: { required: false },
-      analytics: { required: false },
-      marketing: { required: false }
-    }
+  consentStyleUrl,
+  assetUrls: {
+    'styles/consent.css': consentStyleUrl,
+    'scripts/site-icons.js': siteIconsScriptUrl,
+    'scripts/web-mcp.js': webMcpScriptUrl
   }
+});
+const themeAssetUrls = {
+  'styles/consent.css': consentStyleUrl,
+  'scripts/site-icons.js': siteIconsScriptUrl,
+  'scripts/web-mcp.js': webMcpScriptUrl
 };
+const bodyEndScripts = getThemeBodyEndScripts(themeConfigRaw, withBase, themeAssetUrls);
 ---
 <!doctype html>
 <html lang={lang}>
@@ -68,6 +58,17 @@ const themeConfig = {
     </div>
     <script is:inline set:html={`window.JSGripeConfig = ${JSON.stringify(themeConfig)};`} />
     <script is:inline src={consentScriptUrl} defer></script>
-    <script is:inline src={withBase('/assets/site-icons.js')} defer></script>
+    {bodyEndScripts.map((script) => (
+      <script
+        is:inline
+        type={script.consent ? 'text/plain' : undefined}
+        src={script.consent ? undefined : script.src}
+        data-consent-category={script.consent}
+        data-consent-src={script.consent ? script.src : undefined}
+        defer={script.defer}
+        async={script.async}
+        {...script.attrs}
+      ></script>
+    ))}
   </body>
 </html>

@@ -11,7 +11,7 @@ features:
   comments: false
   webMcp: true
 featureScripts:
-  webMcp: /assets/agent-discovery.js
+  webMcp: scripts/web-mcp.js
 featureStyles:
   consent:
     - styles/consent.css
@@ -39,7 +39,10 @@ pageScripts:
 styles: []
 scripts:
   head: []
-  bodyEnd: []
+  bodyEnd:
+    - src: scripts/site-icons.js
+      consent: preferences
+      defer: true
 icons:
   favicon: /assets/brand/site-icon.png
   icon32: /assets/brand/site-icon.png
@@ -117,3 +120,13 @@ footer:
         zh-CN: 站点地图
         zh-TW: 站點地圖
         en: Sitemap
+plugins:
+  analytics:
+    cloudflareWebAnalytics:
+      enabled: true
+      src: https://static.cloudflareinsights.com/beacon.min.js
+      token: a2c7ad0cfc8f4493aa80c8b5aae99357
+      defer: true
+      consent: analytics
+      beacon:
+        spa: false
