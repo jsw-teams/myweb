@@ -221,50 +221,8 @@
   function hidePanel() {
     var layer = document.querySelector("[data-consent-layer]");
     if (layer) layer.hidden = true;
+    if (readChoice()) document.documentElement.classList.add("has-consent-choice");
     document.body.classList.remove("consent-pending");
-  }
-
-  function localizedConsentText() {
-    var locale = document.documentElement.lang || config.defaultLocale || "zh-CN";
-    var messages = {
-      "zh-CN": {
-        title: "隐私偏好",
-        intro: "我们只在获得允许后加载评论、统计或其他可选第三方脚本。必要功能始终启用。",
-        necessary: "必要功能",
-        preferences: "偏好与评论",
-        analytics: "统计分析",
-        marketing: "营销",
-        acceptAll: "接受全部",
-        rejectAll: "仅必要",
-        save: "保存选择",
-        close: "关闭"
-      },
-      "zh-TW": {
-        title: "隱私偏好",
-        intro: "我們只會在獲得允許後載入評論、統計或其他可選第三方腳本。必要功能始終啟用。",
-        necessary: "必要功能",
-        preferences: "偏好與評論",
-        analytics: "統計分析",
-        marketing: "行銷",
-        acceptAll: "接受全部",
-        rejectAll: "僅必要",
-        save: "儲存選擇",
-        close: "關閉"
-      },
-      en: {
-        title: "Privacy preferences",
-        intro: "Optional third-party scripts such as comments or analytics load only after permission. Necessary features stay on.",
-        necessary: "Necessary",
-        preferences: "Preferences and comments",
-        analytics: "Analytics",
-        marketing: "Marketing",
-        acceptAll: "Accept all",
-        rejectAll: "Necessary only",
-        save: "Save choices",
-        close: "Close"
-      }
-    };
-    return messages[locale] || messages[locale.split("-")[0]] || messages.en;
   }
 
   function writeChoice(values) {
@@ -286,40 +244,11 @@
     loadThemeFeatures();
   }
 
-  function createPanel() {
-    var text = localizedConsentText();
+  function bindPanel(layer) {
+    if (!layer || layer.getAttribute("data-consent-bound") === "true") return layer;
     var optional = consentOptionalCategories();
-    var layer = document.createElement("div");
-    layer.className = "consent-layer";
-    layer.setAttribute("data-consent-layer", "");
-    var panel = document.createElement("section");
-    panel.className = "consent-panel";
-    panel.setAttribute("data-consent-panel", "");
-    panel.setAttribute("role", "dialog");
-    panel.setAttribute("aria-modal", "true");
-    panel.setAttribute("aria-labelledby", "consent-title");
-    panel.innerHTML = [
-      "<div class='consent-header'>",
-      "<h2 id='consent-title'>" + escapeHtml(text.title) + "</h2>",
-      "<button class='consent-close' type='button' data-consent-close aria-label='" + escapeHtml(text.close) + "'>x</button>",
-      "</div>",
-      "<p class='consent-copy'>" + escapeHtml(text.intro) + "</p>",
-      "<div class='consent-options'>",
-      "<label><input type='checkbox' checked disabled> " + escapeHtml(text.necessary) + "</label>",
-      optional.map(function (key) {
-        var label = text[key] || key;
-        return "<label><input type='checkbox' data-consent-input='" + key + "'> " + escapeHtml(label) + "</label>";
-      }).join(""),
-      "</div>",
-      "<div class='consent-actions'>",
-      "<button class='button-link' type='button' data-consent-accept>" + escapeHtml(text.acceptAll) + "</button>",
-      "<button class='button-link button-link-secondary' type='button' data-consent-reject>" + escapeHtml(text.rejectAll) + "</button>",
-      "<button class='button-link button-link-secondary' type='button' data-consent-save>" + escapeHtml(text.save) + "</button>",
-      "</div>"
-    ].join("");
-    layer.appendChild(document.createElement("div")).className = "consent-backdrop";
-    layer.appendChild(panel);
-    document.body.appendChild(layer);
+    var panel = layer.querySelector("[data-consent-panel]");
+    if (!panel) return layer;
     panel.querySelector("[data-consent-close]").addEventListener("click", hidePanel);
     panel.querySelector("[data-consent-accept]").addEventListener("click", function () {
       var values = {};
@@ -337,13 +266,15 @@
       });
       writeChoice(values);
     });
+    layer.setAttribute("data-consent-bound", "true");
     return layer;
   }
 
   function openPanel(forcePending) {
     if (!consentEnabled()) return;
     var layer = document.querySelector("[data-consent-layer]");
-    if (!layer) layer = createPanel();
+    if (!layer) return;
+    bindPanel(layer);
     var panel = layer.querySelector("[data-consent-panel]");
     var choice = readChoice();
     var pending = forcePending === true || !choice;
@@ -353,6 +284,7 @@
     });
     var close = panel.querySelector("[data-consent-close]");
     if (close) close.hidden = pending;
+    document.documentElement.classList.remove("has-consent-choice");
     document.body.classList.toggle("consent-pending", pending);
     layer.hidden = false;
   }
@@ -370,10 +302,6 @@
     openPanel();
   });
 
-  (featureStyles.consent || []).forEach(function (href, index) {
-    loadStyleOnce(href, "theme-feature-style-consent-" + index);
-  });
-
   if (!consentEnabled()) {
     loadThemeFeatures();
     return;
@@ -381,6 +309,8 @@
 
   var current = readChoice();
   if (current) {
+    document.documentElement.classList.add("has-consent-choice");
+    hidePanel();
     activateConsentScripts(current.categories);
     loadThemeFeatures();
   } else {

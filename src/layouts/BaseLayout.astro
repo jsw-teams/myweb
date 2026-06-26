@@ -9,7 +9,7 @@ import { withBase } from '../lib/i18n';
 import '../../themes/intro/style.css';
 import '../styles/global.css';
 import consentScriptUrl from '../../themes/intro/scripts/consent.js?url';
-import consentStyleUrl from '../../themes/intro/styles/consent.css?url';
+import consentStyleRaw from '../../themes/intro/styles/consent.css?raw';
 import themeConfigRaw from '../../themes/intro/theme.yml?raw';
 import webMcpScriptRaw from '../../themes/intro/scripts/web-mcp.js?raw';
 import { getThemeAssetUrls, getThemeBodyEndScripts, getThemeBrowserConfig, getThemeHeadScripts } from '../lib/theme-config';
@@ -22,22 +22,64 @@ type Props = {
 
 const { lang, page, seo } = Astro.props;
 const t = messages[lang];
-const themeAssetUrls = getThemeAssetUrls(themeConfigRaw, withBase, { 'styles/consent.css': consentStyleUrl });
+const themeAssetUrls = getThemeAssetUrls(themeConfigRaw, withBase);
 const themeConfig = getThemeBrowserConfig(themeConfigRaw, {
   basePath: import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL.replace(/\/$/, ''),
-  consentStyleUrl,
+  consentStyleUrl: '',
   assetUrls: themeAssetUrls
 });
 const bodyEndScripts = getThemeBodyEndScripts(themeConfigRaw, withBase, themeAssetUrls);
 const headScripts = getThemeHeadScripts(themeConfigRaw, withBase, themeAssetUrls);
 const getInlineHeadScript = (src: string) =>
   src.endsWith('/assets/theme/intro/scripts/web-mcp.js') ? webMcpScriptRaw : '';
+const consentText = {
+  'zh-CN': {
+    title: '隐私偏好',
+    intro: '我们只在获得允许后加载评论、统计或其他可选第三方脚本。必要功能始终启用。',
+    necessary: '必要功能',
+    preferences: '偏好与评论',
+    analytics: '统计分析',
+    marketing: '营销',
+    acceptAll: '接受全部',
+    rejectAll: '仅必要',
+    save: '保存选择',
+    close: '关闭'
+  },
+  'zh-TW': {
+    title: '隱私偏好',
+    intro: '我們只會在獲得允許後載入評論、統計或其他可選第三方腳本。必要功能始終啟用。',
+    necessary: '必要功能',
+    preferences: '偏好與評論',
+    analytics: '統計分析',
+    marketing: '行銷',
+    acceptAll: '接受全部',
+    rejectAll: '僅必要',
+    save: '儲存選擇',
+    close: '關閉'
+  },
+  en: {
+    title: 'Privacy preferences',
+    intro: 'Optional third-party scripts such as comments or analytics load only after permission. Necessary features stay on.',
+    necessary: 'Necessary',
+    preferences: 'Preferences and comments',
+    analytics: 'Analytics',
+    marketing: 'Marketing',
+    acceptAll: 'Accept all',
+    rejectAll: 'Necessary only',
+    save: 'Save choices',
+    close: 'Close'
+  }
+}[lang];
+const consentOptionalCategories = ['preferences', 'analytics', 'marketing'] as const;
+const consentBootScript = `try{var c=JSON.parse(localStorage.getItem('js-gripe-consent')||'null');if(c&&String(c.revision)==='1')document.documentElement.classList.add('has-consent-choice')}catch(e){}`;
 ---
 <!doctype html>
 <html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline set:html={consentBootScript}></script>
+    <style is:inline set:html={consentStyleRaw}></style>
     <Seo lang={lang} page={page} seo={seo} />
     {headScripts.map((script) =>
       getInlineHeadScript(script.src) ? (
@@ -61,6 +103,33 @@ const getInlineHeadScript = (src: string) =>
         <slot />
       </main>
       <Footer lang={lang} page={page} />
+    </div>
+    <div class="consent-layer" data-consent-layer data-initial-consent>
+      <div class="consent-backdrop"></div>
+      <section
+        class="consent-panel"
+        data-consent-panel
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="consent-title"
+      >
+        <div class="consent-header">
+          <h2 id="consent-title">{consentText.title}</h2>
+          <button class="consent-close" type="button" data-consent-close aria-label={consentText.close} hidden>x</button>
+        </div>
+        <p class="consent-copy">{consentText.intro}</p>
+        <div class="consent-options">
+          <label><input type="checkbox" checked disabled /> {consentText.necessary}</label>
+          {consentOptionalCategories.map((key) => (
+            <label><input type="checkbox" data-consent-input={key} /> {consentText[key]}</label>
+          ))}
+        </div>
+        <div class="consent-actions">
+          <button class="button-link" type="button" data-consent-accept>{consentText.acceptAll}</button>
+          <button class="button-link button-link-secondary" type="button" data-consent-reject>{consentText.rejectAll}</button>
+          <button class="button-link button-link-secondary" type="button" data-consent-save>{consentText.save}</button>
+        </div>
+      </section>
     </div>
     <script is:inline set:html={`window.JSGripeConfig = ${JSON.stringify(themeConfig)};`} />
     <script is:inline src={consentScriptUrl} defer></script>
