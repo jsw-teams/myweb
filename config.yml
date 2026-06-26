@@ -24,8 +24,8 @@ author:
 theme:
   name: intro
 icons:
-  favicon: /assets/brand/site-icon.png
-  appleTouchIcon: /assets/brand/site-icon.png
+  favicon: /assets/brand/generated/site-icon-48.png
+  appleTouchIcon: /assets/brand/generated/site-icon-180.png
   ogImage: /assets/brand/site-icon.png
   mascot: /assets/brand/mascot-sheet.png
 sitemap:

@@ -15,7 +15,23 @@ const t = messages[lang];
 ---
 <header class="site-header">
   <a class="brand" href={getPagePath(lang, 'home')} aria-label={site.name}>
-    <img src={withBase(site.icon)} alt="" width="44" height="44" />
+    <picture>
+      <source
+        type="image/avif"
+        srcset={`${withBase('/assets/brand/generated/site-icon-48.avif')} 1x, ${withBase('/assets/brand/generated/site-icon-96.avif')} 2x`}
+      />
+      <source
+        type="image/webp"
+        srcset={`${withBase('/assets/brand/generated/site-icon-48.webp')} 1x, ${withBase('/assets/brand/generated/site-icon-96.webp')} 2x`}
+      />
+      <img
+        src={withBase('/assets/brand/generated/site-icon-48.png')}
+        alt=""
+        width="44"
+        height="44"
+        decoding="async"
+      />
+    </picture>
     <span>{site.shortName}</span>
   </a>
   <nav class="site-nav" aria-label={t.navLabel}>

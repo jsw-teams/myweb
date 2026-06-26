@@ -9,7 +9,36 @@ type Props = {
 };
 
 const { alt, image = site.mascot, compact = false } = Astro.props;
+const baseName = image.includes('mascot-contact')
+  ? 'mascot-contact'
+  : image.includes('mascot-friends')
+    ? 'mascot-friends'
+    : 'mascot-sheet';
+const imageSizes = baseName === 'mascot-sheet' ? [360, 640, 800] : [320, 480];
+const renderedWidth = compact ? 320 : 390;
+const renderedHeight = compact ? 320 : 390;
 ---
 <aside class:list={['mascot-card', { compact }]}>
-  <img class="mascot-sheet" src={withBase(image)} alt={alt} loading={compact ? 'lazy' : 'eager'} />
+  <picture>
+    <source
+      type="image/avif"
+      srcset={imageSizes.map((size) => `${withBase(`/assets/brand/generated/${baseName}-${size}.avif`)} ${size}w`).join(', ')}
+      sizes={compact ? '(max-width: 900px) 260px, 320px' : '(max-width: 900px) 260px, 390px'}
+    />
+    <source
+      type="image/webp"
+      srcset={imageSizes.map((size) => `${withBase(`/assets/brand/generated/${baseName}-${size}.webp`)} ${size}w`).join(', ')}
+      sizes={compact ? '(max-width: 900px) 260px, 320px' : '(max-width: 900px) 260px, 390px'}
+    />
+    <img
+      class="mascot-sheet"
+      src={withBase(image)}
+      alt={alt}
+      width={renderedWidth}
+      height={renderedHeight}
+      loading={compact ? 'lazy' : 'eager'}
+      decoding="async"
+      fetchpriority={compact ? undefined : 'high'}
+    />
+  </picture>
 </aside>

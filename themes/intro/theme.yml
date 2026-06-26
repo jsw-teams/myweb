@@ -57,9 +57,9 @@ scripts:
       consent: necessary
       defer: true
 icons:
-  favicon: /assets/brand/site-icon.png
-  icon32: /assets/brand/site-icon.png
-  appleTouchIcon: /assets/brand/site-icon.png
+  favicon: /assets/brand/generated/site-icon-48.png
+  icon32: /assets/brand/generated/site-icon-48.png
+  appleTouchIcon: /assets/brand/generated/site-icon-180.png
 pageMascots:
   default: /assets/brand/mascot-sheet.png
   about: /assets/brand/mascot-sheet.png
