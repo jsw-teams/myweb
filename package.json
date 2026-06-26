@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "sync:blog": "node scripts/sync-blog-feed.mjs",
-    "predev": "node scripts/sync-blog-feed.mjs",
+    "predev": "node scripts/sync-theme-assets.mjs && node scripts/sync-blog-feed.mjs",
     "dev": "astro dev",
-    "prebuild": "node scripts/sync-blog-feed.mjs",
+    "prebuild": "node scripts/sync-theme-assets.mjs && node scripts/sync-blog-feed.mjs",
     "build": "astro build",
     "deploy:local": "/opt/deploy-hooks/bin/deploy-myweb.sh",
     "postbuild": "node scripts/generate-markdown-from-html.mjs && node scripts/generate-seo-files.mjs && node scripts/rewrite-relative-paths.mjs && node scripts/mirror-pages-prefix.mjs",

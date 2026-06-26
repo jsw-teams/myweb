@@ -5,6 +5,8 @@ import { prefixedLanguages, type PageKey } from '../../i18n/config';
 import { messages } from '../../i18n/messages';
 import { getBlogUrl } from '../../lib/blog';
 import { getLang, withBase } from '../../lib/i18n';
+import { getThemePageMascot } from '../../lib/theme-config';
+import themeConfigRaw from '../../../themes/intro/theme.yml?raw';
 
 export function getStaticPaths() {
   return prefixedLanguages.map((lang) => ({ params: { lang } }));
@@ -14,6 +16,7 @@ const lang = getLang(Astro.params.lang);
 const page: PageKey = 'writing';
 const t = messages[lang];
 const blogUrl = getBlogUrl(lang);
+const mascot = getThemePageMascot(themeConfigRaw, page);
 ---
 <BaseLayout lang={lang} page={page}>
   <section class="page-heading" aria-labelledby="page-title">
@@ -44,7 +47,7 @@ const blogUrl = getBlogUrl(lang);
         </div>
       </div>
     </section>
-    <MascotCard image="/assets/brand/mascot-sheet.png" compact alt={t.writing.mascotAlt} />
+    <MascotCard image={mascot} compact alt={t.writing.mascotAlt} />
   </div>
   <script is:inline src={withBase('/assets/recent-posts.js')} defer></script>
 </BaseLayout>

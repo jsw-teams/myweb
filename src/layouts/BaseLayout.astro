@@ -11,7 +11,7 @@ import '../styles/global.css';
 import consentScriptUrl from '../../themes/intro/scripts/consent.js?url';
 import consentStyleUrl from '../../themes/intro/styles/consent.css?url';
 import themeConfigRaw from '../../themes/intro/theme.yml?raw';
-import { getThemeBodyEndScripts, getThemeBrowserConfig } from '../lib/theme-config';
+import { getThemeAssetUrls, getThemeBodyEndScripts, getThemeBrowserConfig } from '../lib/theme-config';
 
 type Props = {
   lang: Lang;
@@ -21,11 +21,7 @@ type Props = {
 
 const { lang, page, seo } = Astro.props;
 const t = messages[lang];
-const themeAssetUrls = {
-  'styles/consent.css': consentStyleUrl,
-  'scripts/site-icons.js': withBase('/assets/theme/intro/scripts/site-icons.js'),
-  'scripts/web-mcp.js': withBase('/assets/theme/intro/scripts/web-mcp.js')
-};
+const themeAssetUrls = getThemeAssetUrls(themeConfigRaw, withBase, { 'styles/consent.css': consentStyleUrl });
 const themeConfig = getThemeBrowserConfig(themeConfigRaw, {
   basePath: import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL.replace(/\/$/, ''),
   consentStyleUrl,

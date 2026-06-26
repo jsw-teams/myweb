@@ -1,4 +1,5 @@
 import type { Lang } from '../i18n/config';
+import type { PageKey } from '../i18n/config';
 
 type ThemeBrowserConfigOptions = {
   basePath: string;
@@ -18,6 +19,45 @@ export type ThemeScript = {
   async?: boolean;
   attrs?: Record<string, string>;
 };
+
+export type ThemeNavigationEntry = {
+  key: PageKey;
+  tone?: string;
+};
+
+export function getThemeName(themeConfig: string) {
+  return readScalar(themeConfig, 'name', 'intro');
+}
+
+export function getThemeAssetUrls(
+  themeConfig: string,
+  withBase: (path: string) => string,
+  overrides: Record<string, string> = {}
+) {
+  const themeName = getThemeName(themeConfig);
+  const assetUrls: Record<string, string> = { ...overrides };
+  const setThemeAsset = (value: string) => {
+    if (!value || /^(?:[a-z][a-z0-9+.-]*:|\/\/|\/)/i.test(value)) return;
+    assetUrls[value] ??= withBase(`/assets/theme/${themeName}/${value}`);
+  };
+
+  Object.values(readMap(themeConfig, 'featureScripts')).forEach(setThemeAsset);
+  for (const script of readScripts(themeConfig, 'bodyEnd')) setThemeAsset(script.src);
+
+  return assetUrls;
+}
+
+export function getThemePageMascot(themeConfig: string, page: PageKey) {
+  const mascots = readMap(themeConfig, 'pageMascots');
+  return mascots[page] || mascots.default || '';
+}
+
+export function getThemeNavigation(themeConfig: string) {
+  return {
+    primary: readNavigationEntries(themeConfig, 'primary'),
+    secondary: readNavigationEntries(themeConfig, 'secondary')
+  };
+}
 
 export function getThemeBrowserConfig(themeConfig: string, options: ThemeBrowserConfigOptions) {
   const resolveThemeAsset = createThemeAssetResolver(options.assetUrls);
@@ -196,6 +236,32 @@ function readScripts(themeConfig: string, key: string): ThemeScript[] {
   }));
 }
 
+function readNavigationEntries(themeConfig: string, key: string): ThemeNavigationEntry[] {
+  const block = readNestedBlock(readBlock(themeConfig, 'navigation'), key, 2);
+  const entries: Array<Record<string, string>> = [];
+  let current: Record<string, string> | null = null;
+
+  for (const line of block.split(/\r?\n/)) {
+    const start = line.match(/^    -\s*([\w-]+):\s*(.+?)\s*$/);
+    if (start) {
+      current = { [start[1]]: unquote(start[2]) };
+      entries.push(current);
+      continue;
+    }
+
+    const item = line.match(/^      ([\w-]+):\s*(.+?)\s*$/);
+    if (item && current) current[item[1]] = unquote(item[2]);
+  }
+
+  return entries
+    .filter((entry): entry is Record<string, string> & { key: PageKey } => isPageKey(entry.key))
+    .map((entry) => ({ key: entry.key, tone: entry.tone }));
+}
+
+function isPageKey(value: string): value is PageKey {
+  return ['home', 'about', 'projects', 'writing', 'privacy', 'friends', 'contact'].includes(value);
+}
+
 function readBoolMap(themeConfig: string, key: string) {
   const values: Record<string, boolean> = {};
   for (const [name, value] of Object.entries(readMap(themeConfig, key))) {
@@ -232,6 +298,11 @@ function readMap(raw: string, key: string) {
     if (match) values[match[1]] = unquote(match[2]);
   }
   return values;
+}
+
+function readScalar(raw: string, key: string, fallback = '') {
+  const match = raw.match(new RegExp(`^${escapeRegExp(key)}:\\s*(.+?)\\s*$`, 'm'));
+  return match ? unquote(match[1]) : fallback;
 }
 
 function readBlock(raw: string, key: string) {

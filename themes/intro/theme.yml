@@ -36,6 +36,19 @@ pageStyles:
 pageScripts:
   home: []
   page: []
+navigation:
+  primary:
+    - key: projects
+      tone: blue
+    - key: writing
+      tone: violet
+    - key: friends
+      tone: green
+    - key: contact
+      tone: red
+  secondary:
+    - key: about
+    - key: privacy
 styles: []
 scripts:
   head: []
@@ -47,6 +60,14 @@ icons:
   favicon: /assets/brand/site-icon.png
   icon32: /assets/brand/site-icon.png
   appleTouchIcon: /assets/brand/site-icon.png
+pageMascots:
+  default: /assets/brand/mascot-sheet.png
+  about: /assets/brand/mascot-sheet.png
+  projects: /assets/brand/mascot-sheet.png
+  writing: /assets/brand/mascot-sheet.png
+  privacy: /assets/brand/mascot-sheet.png
+  friends: /assets/brand/mascot-friends.png
+  contact: /assets/brand/mascot-contact.png
 pwa:
   backgroundColor: "#f8f4ec"
   themeColor: "#171514"

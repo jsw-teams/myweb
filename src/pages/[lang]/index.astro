@@ -4,6 +4,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { prefixedLanguages, type PageKey } from '../../i18n/config';
 import { messages } from '../../i18n/messages';
 import { getLang, getPagePath } from '../../lib/i18n';
+import { getThemeNavigation } from '../../lib/theme-config';
+import themeConfigRaw from '../../../themes/intro/theme.yml?raw';
 
 export function getStaticPaths() {
   return prefixedLanguages.map((lang) => ({ params: { lang } }));
@@ -12,7 +14,7 @@ export function getStaticPaths() {
 const lang = getLang(Astro.params.lang);
 const page: PageKey = 'home';
 const t = messages[lang];
-const entries = ['projects', 'writing', 'friends', 'contact'] as const;
+const navigation = getThemeNavigation(themeConfigRaw);
 ---
 <BaseLayout lang={lang} page={page}>
   <section class="hero" aria-labelledby="page-title">
@@ -21,13 +23,19 @@ const entries = ['projects', 'writing', 'friends', 'contact'] as const;
       <h1 id="page-title">{t.pages.home.heading}</h1>
       <p class="lead">{t.home.lead}</p>
       <div class="entry-grid" aria-label={t.navLabel}>
-        {entries.map((entry) => (
-          <a class="entry-card" href={getPagePath(lang, entry)}>
-            <h2>{t.cards[entry]}</h2>
-            <p>{t.home.entries[entry]}</p>
+        {navigation.primary.map((entry) => (
+          <a class="entry-card" data-tone={entry.tone} href={getPagePath(lang, entry.key)}>
+            <span class="entry-kicker">{entry.key}</span>
+            <h2>{t.cards[entry.key as keyof typeof t.cards] ?? t.pages[entry.key].heading}</h2>
+            <p>{t.home.entries[entry.key as keyof typeof t.home.entries]}</p>
           </a>
         ))}
       </div>
+      <nav class="quick-links" aria-label={t.navLabel}>
+        {navigation.secondary.map((entry) => (
+          <a href={getPagePath(lang, entry.key)}>{t.pages[entry.key].heading}</a>
+        ))}
+      </nav>
     </div>
     <MascotCard alt={t.home.heroAlt} />
   </section>

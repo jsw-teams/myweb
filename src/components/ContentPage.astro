@@ -3,17 +3,19 @@ import MascotCard from './MascotCard.astro';
 import type { Lang, PageKey } from '../i18n/config';
 import { messages } from '../i18n/messages';
 import { getContentPage } from '../lib/content-pages';
+import { getThemePageMascot } from '../lib/theme-config';
+import themeConfigRaw from '../../themes/intro/theme.yml?raw';
 
 type Props = {
   lang: Lang;
   page: PageKey;
-  mascot: string;
   mascotAlt: string;
 };
 
-const { lang, page, mascot, mascotAlt } = Astro.props;
+const { lang, page, mascotAlt } = Astro.props;
 const t = messages[lang];
 const content = getContentPage(page, lang);
+const mascot = getThemePageMascot(themeConfigRaw, page);
 ---
 <section class="page-heading" aria-labelledby="page-title">
   <h1 id="page-title">{content?.title ?? t.pages[page].heading}</h1>
