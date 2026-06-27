@@ -113,28 +113,16 @@ footer:
   copyright:
     enabled: true
     text:
-      zh-CN: "© {year} JS.Gripe"
-      zh-TW: "© {year} JS.Gripe"
+      zh-CN: "© {year} 技诉"
+      zh-TW: "© {year} 技訴"
       en: "© {year} JS.Gripe"
   links:
-    - key: about
-      href: /:locale/about/
-      label:
-        zh-CN: 关于
-        zh-TW: 關於
-        en: About
     - key: privacy
       href: /:locale/privacy/
       label:
         zh-CN: 隐私政策
         zh-TW: 隱私政策
         en: Privacy
-    - key: contact
-      href: /:locale/contact/
-      label:
-        zh-CN: 联系方式
-        zh-TW: 聯絡方式
-        en: Contact
     - key: sitemap
       href: /sitemap.xml
       label:
